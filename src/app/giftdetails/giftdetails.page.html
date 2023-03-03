@@ -1,33 +1,30 @@
 <ion-header>
   <ion-toolbar>
      <ion-buttons slot="start">
-      <ion-menu-button>
-        <ion-icon
-          src="../../assets/images/menu.svg"
-        ></ion-icon>
-      </ion-menu-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Product</ion-title>
-    <ion-buttons slot="end">
+    <!-- <ion-buttons slot="end">
       <ion-button class="notification">
         <ion-icon
           src="../../assets/images/notification.svg"
         ></ion-icon>
       </ion-button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="product_details">
+  <div class="product_details" *ngIf="giftDetials">
     <div class="product_details_img_wrap">
-      <ion-img src="../../assets/images/gift-image-large.png"></ion-img>
+      <ion-img src="{{baseImageUrl+giftDetials.image}}"></ion-img>
     </div>
-    <h1 class="product_title">Water Thinnable cement primer</h1>
+    <h1 class="product_title">{{giftDetials.name}}</h1>
+    <h5>{{giftDetials.short_desc}}</h5>
     <div class="product_content">
-      <p>Mayur water based cement primer (WBCP) series is your go-to option for application on interior and exterior walls, brick work and asbestos.</p>
+      <p>{{giftDetials.desc}}</p>
       <p><strong>Quantity:</strong> 1</p>
-      <p><strong>Points:</strong> 870</p>
+      <p><strong>Points:</strong> {{giftDetials.points}}</p>
     </div>
   </div>
 </ion-content>

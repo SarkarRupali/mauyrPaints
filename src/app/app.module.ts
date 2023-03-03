@@ -14,11 +14,12 @@ import { ApiService } from './services/api.service';
 import { Camera } from '@ionic-native/camera/ngx';
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule, CommonModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, ApiService, Camera, FileTransfer, File],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, ApiService, Camera, FileTransfer, File, BarcodeScanner],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

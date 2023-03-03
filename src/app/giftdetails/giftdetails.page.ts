@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-giftdetails',
@@ -9,6 +10,8 @@ import { ApiService } from '../services/api.service';
 })
 export class GiftdetailsPage implements OnInit {
   giftId: any = '';
+  giftDetials: any;
+  baseImageUrl = environment.baseImageUrl;
 
   constructor(private activatedRoute: ActivatedRoute, private _api: ApiService) { }
 
@@ -17,7 +20,12 @@ export class GiftdetailsPage implements OnInit {
 
   ionViewWillEnter() {
     this.giftId = this.activatedRoute.snapshot.paramMap.get('giftId')
-    // this._api.giftdetails().
+    this._api.giftdetails(this.giftId).subscribe(res => {
+      console.log(res);
+      if (res.error == false) {
+        this.giftDetials = res.data
+      }
+    })
   }
 
 }

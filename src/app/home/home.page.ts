@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
+import { NavController } from '@ionic/angular';
 
 import { ApiService } from '../services/api.service';
 import { HelperService } from '../services/helper.service';
 import { environment } from 'src/environments/environment';
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -11,11 +12,15 @@ import { environment } from 'src/environments/environment';
 })
 export class HomePage implements OnInit {
   userData: any;
+  userPoints: any = 0;
   bannerList: any = [];
   categoryList: any = [];
+  top5GiftList: any = [];
+  lastHistory: any = [];
+  scannedData: any;
   baseImageUrl = environment.baseImageUrl;
 
-  constructor(private _api: ApiService, private _helper: HelperService) { }
+  constructor(private _api: ApiService, private _helper: HelperService, private barcodeScanner: BarcodeScanner, private navCtrl: NavController) { }
 
   slideOpts = {
     speed: 400,
@@ -36,6 +41,9 @@ export class HomePage implements OnInit {
     // this._helper.startLoading();
     this.getBanner();
     this.getCategory();
+    if (this.userData.type == 1) {
+      this.painterData()
+    }
   }
 
   // Method call to get banner list
@@ -64,17 +72,62 @@ export class HomePage implements OnInit {
     })
   }
 
-  // getPoints(){
-  //   this._api.getuserPoints().subscribe(res => {
-  //     console.log(res);
-  //     if (res.error == false) {
-  //       this.categoryList = res.data
-  //       this._helper.dismissLoader();
-  //     } else {
-  //       this._helper.dismissLoader();
-  //     }
-  //   })
-  // }
+  // Method call to get home rewrds data
+  painterData() {
+    this._api.getpainterData(this.userData.id).subscribe(res => {
+      console.log(res);
+      if (res.error == false) {
+        this.top5GiftList = res.rewardproduct;
+        this.userPoints = res.userPoints;
+        this.lastHistory = res.history;
+        this._helper.dismissLoader();
+      } else {
+        this._helper.dismissLoader();
+      }
+    })
+  }
+
+  // Method call to scan qr code and get data
+  scanQRCode() {
+    const options: BarcodeScannerOptions = {
+      preferFrontCamera: false,
+      showFlipCameraButton: true,
+      showTorchButton: true,
+      torchOn: false,
+      prompt: 'Place a barcode inside the scan area',
+      resultDisplayDuration: 500,
+      //formats: 'EAN_13,EAN_8,QR_CODE,PDF_417 ',
+      formats: 'QR_CODE',
+      orientation: 'portrait',
+    };
+
+    this.barcodeScanner.scan(options).then(qrCodeData => {
+      this._helper.startLoading()
+      console.log('Barcode data', qrCodeData);
+      this.scannedData = qrCodeData;
+      if (qrCodeData) {
+        let data = {
+          "code": qrCodeData.text,
+          "user_id": this.userData.id
+        }
+        this._api.addRewardPointsUsingQRCode(data).subscribe(res => {
+          if (res.error == false) {
+            this._helper.dismissLoader();
+            this._helper.alertToast('You get reward successfully.')
+            this.navCtrl.navigateForward('/reward')
+          } else {
+            this._helper.dismissLoader();
+            this._helper.alertToast('Something went wrong. Please try again')
+          }
+        })
+      }
+
+    }).catch(err => {
+      console.log('Error', err);
+    });
+  }
+
+
 
 
 }

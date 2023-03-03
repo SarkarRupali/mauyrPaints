@@ -15,6 +15,16 @@ To solve camera plugin issue :
 	
 Moment
 	npm i moment
+
+Scnner : 
+	ionic cordova plugin add phonegap-plugin-barcodescanner
+	npm install @ionic-native/barcode-scanner
+		
+	To solve barcode issue	
+	in plugin/phonegapbarcode plugin
+		dependencies {
+		    implementation(name:'barcodescanner-release-2.1.5', ext:'aar')
+		}
 	
 	
 	Customer Login :

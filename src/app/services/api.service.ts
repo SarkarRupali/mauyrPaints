@@ -35,9 +35,29 @@ export class ApiService {
     return this.http.post<any>(baseURl + 'painter/identityDocument/upload', formData)
   }
 
+  //home page data
+  getpainterData(userId: any) {
+    return this.http.get<any>(baseURl + `reward/product/list/${userId}`)
+  }
+
   //gifts
   getAllGifts() {
     return this.http.get<any>(baseURl + 'reward/product')
+  }
+
+  //gift details
+  giftdetails(giftId: any) {
+    return this.http.get<any>(baseURl + `reward/product/${giftId}`)
+  }
+
+  // add rewards using qrcode
+  addRewardPointsUsingQRCode(qrData: any) {
+    return this.http.post<any>(baseURl + `QRcode/`, qrData)
+  }
+
+  // get rewards
+  getRewards(data: any) {
+    return this.http.post<any>(baseURl + `reward/history`, data)
   }
 
 
