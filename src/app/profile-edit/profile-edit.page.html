@@ -1,11 +1,12 @@
 <ion-header>
   <ion-toolbar>
-     <ion-buttons slot="start">
-      <ion-back-button>
-      </ion-back-button>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Profile Edit</ion-title>
-   
+    <ion-buttons slot="end">
+      <ion-button></ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -40,7 +41,7 @@
     </div>
 
     <ion-item lines="none">
-      <ion-img src="../../assets/images/Frame.svg"></ion-img>
+      <ion-img src="../../assets/images/envelop.svg"></ion-img>
       <ion-input placeholder="Email" type="email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"></ion-input>
     </ion-item>
     <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">  
@@ -48,7 +49,7 @@
     </div>
 
     <ion-item lines="none">
-      <ion-img src="../../assets/images/Frame2.svg"></ion-img>
+      <ion-img src="../../assets/images/phone.svg"></ion-img>
       <ion-input formControlName="mobile" type="tel" maxlength="10" placeholder="Phone Number" [ngClass]="{ 'is-invalid': submitted && f['mobile'].errors }"></ion-input>
     </ion-item>
     <div *ngIf="submitted && f['mobile'].errors" class="invalid-feedback">  
@@ -66,19 +67,18 @@
     </div>
 
     <ion-item lines="none">
-      <ion-img src="../../assets/images/Frame.svg"></ion-img>
+      <ion-img src="../../assets/images/Frame3.svg"></ion-img>
       <ion-input placeholder="Address" type="text" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f['address'].errors }"></ion-input>
     </ion-item>
     <div *ngIf="submitted && f['address'].errors" class="invalid-feedback">  
       <span class="danger" *ngIf="f['address'].errors['required']">Address is required.</span>  
       <span class="danger" *ngIf="f['address'].errors['cannotContainSpace']">Please enter valid address.</span>  
     </div>
-
-   
-   
     
-    <ion-button expand="block" type="submit">Edit</ion-button>
-    <ion-button expand="block" (click)="cancel()">Cancel</ion-button>
+    <ion-buttons>
+      <ion-button expand="block" type="submit">Save</ion-button>
+      <ion-button expand="block" class="danger" (click)="cancel()">Cancel</ion-button>
+    </ion-buttons>
   </form>
 </ion-content>
 

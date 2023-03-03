@@ -60,7 +60,8 @@
     <div class="category_wrapper">
       <ul>
         <ng-container *ngFor="let category of categoryList">
-          <li routerLink="/product/{{category.id}}" style="background: url({{baseImageUrl+category.image}}) center no-repeat;" >
+          <li routerLink="/product/{{category.id}}">
+            <img src="{{baseImageUrl+category.image}}" alt="" srcset="">
             <p>{{category.name}}</p>
           </li>
         </ng-container>

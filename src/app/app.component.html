@@ -14,33 +14,33 @@
           </div>
           <ion-menu-toggle auto-hide="false">
             <div class="menus">
-              <ion-item detail="true" lines="none" routerLink="/home" routerLinkActive="selected">
+              <ion-item detail="true" lines="none" routerLink="/home" routerLinkActive="selected" routerDirection="forward">
                 <ion-avatar>
                   <img src="../assets/images/menu_home.png" alt="">
                 </ion-avatar>
                 <ion-label>Home</ion-label>
               </ion-item>
-              <ion-item detail="true" lines="none" routerLink="/about" routerLinkActive="selected">
+              <ion-item detail="true" lines="none" routerLink="/about" routerLinkActive="selected" routerDirection="forward">
                 <ion-avatar>
                   <img src="../assets/images/menu_home.png" alt="">
                 </ion-avatar>
                 <ion-label>About Us</ion-label>
               </ion-item>
-              <ion-item detail="true" lines="none" routerLink="/profile">
+              <ion-item detail="true" lines="none" routerLink="/profile" routerDirection="forward">
                 <ion-avatar>
-                  <img src="../assets/images/menu_profile.png" alt="">
+                  <img src="../assets/images/menu_home.png" alt="">
                 </ion-avatar>
                 <ion-label>My Profile</ion-label>
               </ion-item>
-              <ion-item detail="true" lines="none" routerLink="/gift" *ngIf="userDetails.type==1">
+              <ion-item detail="true" lines="none" routerLink="/gift" *ngIf="userDetails.type==1" routerDirection="forward">
                 <ion-avatar>
-                  <img src="../assets/images/menu_reward.png" alt="">
+                  <img src="../assets/images/menu_home.png" alt="">
                 </ion-avatar>
                 <ion-label>Reward</ion-label>
               </ion-item>
-              <ion-item detail="true" lines="none" routerLink="/complain">
+              <ion-item detail="true" lines="none" routerLink="/complain" routerDirection="forward">
                 <ion-avatar>
-                  <img src="../assets/images/menu_brochure.png" alt="">
+                  <img src="../assets/images/menu_home.png" alt="">
                 </ion-avatar>
                 <ion-label>Make Complain</ion-label>
               </ion-item> 

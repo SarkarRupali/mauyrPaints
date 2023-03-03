@@ -24,7 +24,7 @@
       <ion-img src="{{imageUrl+productdetails.image}}"></ion-img>
     </div>
     <h1 class="product_title">{{productdetails.name}}</h1>
-    <h5 [innerHTML]="productdetails.short_desc"></h5>
+    <div class="short_desc" [innerHTML]="productdetails.short_desc"></div>
     <div class="product_content">
       <p [innerHTML]="productdetails.desc"></p>
       <p><strong>Price:</strong> <span [innerHTML]="productdetails.price"></span></p>
