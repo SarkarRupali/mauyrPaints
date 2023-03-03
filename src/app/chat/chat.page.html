@@ -44,14 +44,15 @@
 
 <ion-footer>
   <ion-toolbar>
-    <ion-item>
+    <ion-item lines="none">
       <ion-textarea [autoGrow]="true" rows="1" placeholder="Enter message here" [(ngModel)]="message"></ion-textarea>
+      <ion-icon slot="end" name="document-attach-outline" (click)="uploadDoc()"></ion-icon>
     </ion-item>
     <ion-button slot="end" expand="block" color="milegreen" (click)="sendMessage()">
       <ion-img src="../../assets/images/send.svg"></ion-img>
     </ion-button>
-    <ion-button slot="end" expand="block" color="milegreen" (click)="uploadDoc()">
+    <!-- <ion-button slot="end" expand="block" color="milegreen" (click)="uploadDoc()">
       doc
-    </ion-button>
+    </ion-button> -->
   </ion-toolbar>
 </ion-footer>

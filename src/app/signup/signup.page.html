@@ -26,7 +26,7 @@
     </div>
 
     <ion-item lines="none">
-      <ion-img src="../../assets/images/Frame.svg"></ion-img>
+      <ion-img src="../../assets/images/envelop.svg"></ion-img>
       <ion-input placeholder="Email" type="email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"></ion-input>
     </ion-item>
     <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">  
@@ -34,7 +34,7 @@
     </div>
 
     <ion-item lines="none">
-      <ion-img src="../../assets/images/Frame2.svg"></ion-img>
+      <ion-img src="../../assets/images/phone.svg"></ion-img>
       <ion-input formControlName="mobile" type="tel" maxlength="10" placeholder="Phone Number" [ngClass]="{ 'is-invalid': submitted && f['mobile'].errors }"></ion-input>
     </ion-item>
     <div *ngIf="submitted && f['mobile'].errors" class="invalid-feedback">  
