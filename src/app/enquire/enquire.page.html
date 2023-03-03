@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Enquire now</ion-title>
+    <ion-buttons slot="end">
+      <ion-button></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <p>If you have any enquiry, please fill up the below form.</p>
+  <form [formGroup]="enquiryForm" (ngSubmit)="submitEnquiry()">
+  
+    <ion-item lines="none">
+      <ion-input placeholder="Full Name" type="text" formControlName="name" [ngClass]="{ 'is-invalid': submitted && f['name'].errors }"></ion-input>
+    </ion-item>
+    <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">  
+      <span class="danger" *ngIf="f['name'].errors['required']">Full Name is required.</span>  
+      <span class="danger" *ngIf="f['name'].errors['pattern']">Please enter valid full name.</span>  
+    </div>
+
+    <ion-item lines="none">
+      <ion-input formControlName="mobile" type="tel" maxlength="10" placeholder="Phone Number" [ngClass]="{ 'is-invalid': submitted && f['mobile'].errors }"></ion-input>
+    </ion-item>
+    <div *ngIf="submitted && f['mobile'].errors" class="invalid-feedback">  
+      <span class="danger" *ngIf="f['mobile'].errors['required']">Phone number is required.</span>  
+      <span class="danger" *ngIf="f['mobile'].errors['pattern']">Please enter valid phone number.</span>  
+    </div>
+
+    <ion-item lines="none">
+      <ion-input placeholder="Whatsapp No." type="tel" maxlength="10" formControlName="whatsapp_no" [ngClass]="{ 'is-invalid': submitted && f['whatsapp_no'].errors }"></ion-input>
+    </ion-item>
+    <div *ngIf="submitted && f['whatsapp_no'].errors" class="invalid-feedback">  
+      <span class="danger" *ngIf="f['whatsapp_no'].errors['required']">Whatsapp number is required.</span>  
+      <span class="danger" *ngIf="f['whatsapp_no'].errors['pattern']">Please enter valid whatsapp number.</span>  
+    </div>
+
+    <ion-item lines="none">
+      <ion-input placeholder="Address" type="text" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f['address'].errors }"></ion-input>
+    </ion-item>
+    <div *ngIf="submitted && f['address'].errors" class="invalid-feedback">  
+      <span class="danger" *ngIf="f['address'].errors['required']">Address is required.</span>  
+      <span class="danger" *ngIf="f['address'].errors['cannotContainSpace']">Please enter valid address.</span>  
+    </div>
+    
+    <ion-item lines="none" class="textarea">
+      <ion-textarea placeholder="Message" formControlName="message" [ngClass]="{ 'is-invalid': submitted && f['message'].errors }"></ion-textarea>
+    </ion-item>
+    <div *ngIf="submitted && f['message'].errors" class="invalid-feedback">  
+      <span class="danger" *ngIf="f['message'].errors['required']">Message is required.</span>  
+      <span class="danger" *ngIf="f['message'].errors['cannotContainSpace']">Please enter message.</span>  
+    </div>
+
+    <ion-button expand="block" type="submit">Submit</ion-button>
+  </form>
+</ion-content>

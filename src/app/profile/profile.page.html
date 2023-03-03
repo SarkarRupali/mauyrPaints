@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-toolbar>
+     <ion-buttons slot="start">
+      <ion-menu-button>
+        <ion-icon
+          src="../../assets/images/menu.svg"
+        ></ion-icon>
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title>Profile</ion-title>
+    <!-- <ion-buttons slot="end">
+      <ion-button class="notification">
+        <ion-icon
+          src="../../assets/images/edit.svg"
+        ></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="profile">
+    <div class="profile_top">
+      <div class="profile_top_img" *ngIf="profileDetails">
+        <ng-container *ngIf="profileDetails.image;else imageBlock">
+         
+        </ng-container>
+        <ng-template #imageBlock>
+          <img src="https://ui-avatars.com/api/?color=DFDFDF&background=ffffff&size=128&bold=true&name={{profileDetails.name}}" alt="">
+        </ng-template>
+        <ion-button (click)="goToEditPage()">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_67_508)">
+            <path d="M11.3333 2.00001C11.5083 1.82491 11.7162 1.68602 11.945 1.59126C12.1738 1.4965 12.419 1.44772 12.6666 1.44772C12.9142 1.44772 13.1594 1.4965 13.3882 1.59126C13.617 1.68602 13.8248 1.82491 13.9999 2.00001C14.175 2.1751 14.3139 2.38297 14.4087 2.61175C14.5034 2.84052 14.5522 3.08572 14.5522 3.33334C14.5522 3.58096 14.5034 3.82616 14.4087 4.05494C14.3139 4.28371 14.175 4.49158 13.9999 4.66668L4.99992 13.6667L1.33325 14.6667L2.33325 11L11.3333 2.00001Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            <defs>
+              <clipPath id="clip0_67_508">
+                <rect width="16" height="16" fill="white"/>
+              </clipPath>
+            </defs>
+          </svg>
+        </ion-button>
+      </div>
+      <div class="profile_top_text" *ngIf="profileDetails">
+        <h3>{{profileDetails.name}}</h3>
+        <p>{{profileDetails.email}}</p>
+      </div>
+    </div>
+    <div class="profile_bottom" *ngIf="profileDetails">
+      <ul>
+        <!-- <li>
+          <span>Retailer ID</span>
+          <span>MYKH120343200</span>
+        </li>
+        <li>
+          <span>Owner Name</span>
+          <span>Gaurav Paul</span>
+        </li>
+        <li>
+          <span>Shop Name</span>
+          <span>Paul Brothers</span>
+        </li>
+        <li>
+          <span>Shop Address</span>
+          <span>S.N.Banerjee Road, kolkata 700120</span>
+        </li> -->
+        <li>
+          <span>Contact No.</span>
+          <span>{{profileDetails.mobile}}</span>
+        </li>
+        <li>
+          <span>Whatsapp No.</span>
+          <span>+91 {{profileDetails.whatsapp_no}}</span>
+        </li>
+        <li *ngIf="profileDetails.email">
+          <span>Email Address</span>
+          <span>{{profileDetails.email}}</span>
+        </li>
+        
+        <li *ngIf="profileDetails.address">
+          <span>Address</span>
+          <span>{{profileDetails.address}}</span>
+        </li>
+        <li *ngIf="profileDetails.state">
+          <span>State</span>
+          <span>{{profileDetails.state}}</span>
+        </li>
+        <li *ngIf="profileDetails.city">
+          <span>City</span>
+          <span>{{profileDetails.city}}</span>
+        </li>
+        <li *ngIf="profileDetails.pin">
+          <span>Pin Code</span>
+          <span>{{profileDetails.pin}}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</ion-content>

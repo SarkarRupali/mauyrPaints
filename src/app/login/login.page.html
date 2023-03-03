@@ -1,0 +1,39 @@
+<ion-content>
+  <div class="login">
+    <div class="logo__wrapper">
+      <ion-img src="../../assets/images/logo.png"></ion-img>
+    </div>
+
+    <div class="login_bottom">
+      <h1>Login</h1>
+      <p>Enjoy your rewards point in a more modern, relax and dynamic way</p>
+
+      <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+        <ion-item lines="none">
+          <ion-input formControlName="mobile" type="tel" maxlength="10" placeholder="Phone Number" [ngClass]="{ 'is-invalid': submitted && f['mobile'].errors }"></ion-input>
+        </ion-item>
+        <div *ngIf="submitted && f['mobile'].errors" class="invalid-feedback">  
+          <span class="danger" *ngIf="f['mobile'].errors['required']">Phone number is required.</span>  
+          <span class="danger" *ngIf="f['mobile'].errors['pattern']">Please enter valid phone number.</span>  
+        </div>
+        
+        <ion-item lines="none">
+          <ion-input formControlName="password" [type]="passwordType" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"></ion-input>
+          <ion-button slot="end" fill="clear" (click)="showPassword()" class="seeClient">
+            <ion-icon *ngIf="showPsw==true" name="eye-outline" color="black" class="iconEye"></ion-icon>
+            <ion-icon *ngIf="showPsw==false" name="eye-off-outline" color="black" class="iconEye"></ion-icon>
+          </ion-button>
+        </ion-item>
+        <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">  
+          <span class="danger" *ngIf="f['password'].errors['required']">Please enter your password.</span>  
+          <span class="danger" *ngIf="f['password'].errors['minlength']">Minimum password length is 6.</span>  
+        </div> 
+
+        <p class="forgotpass"><span routerLink="/forget">Forgot Password ?</span></p>
+        <ion-button expand="block" type="submit">Login</ion-button>
+        <ion-button expand="block" class="google-login"><img src="../../assets/images/google.png" alt="Gogle Icon">Sign up with google</ion-button>
+      </form>
+      <h5>Don't have an account ? <span routerLink="/signup">Sign Up</span></h5>
+    </div>
+  </div>
+</ion-content>

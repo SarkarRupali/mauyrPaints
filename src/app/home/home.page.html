@@ -1,20 +1,239 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+     <ion-buttons slot="start">
+      <ion-menu-button>
+        <ion-icon
+          src="../../assets/images/menu.svg"
+        ></ion-icon>
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title>Home</ion-title>
+    <ion-buttons slot="end" *ngIf="userData.type==2">
+      <ion-button class="notification" routerLink="/notification">
+        <ion-icon
+          src="../../assets/images/notification.svg"
+        ></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <div class="home">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <div class="home_slider">
+      <ion-slides pager="true" [options]="homeSlide">
+        <ion-slide *ngFor = "let banner of bannerList">
+          <div class="slider_content" style="background: url({{baseImageUrl+banner.image}}) center no-repeat;">
+            <h1>{{banner.title}}</h1>
+            <p>{{banner.short_desc}}</p>
+          </div>
+        </ion-slide>
+        <!-- <ion-slide>
+          <div class="slider_content" style="background: url(../../assets/images/rm405-a02d-mockup_1.jpg) center no-repeat;">
+            <h1>Mayur Synthetic Enamel</h1>
+            <p>is a Economical used in Home & Factory for protective coverage against rusting.</p>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="slider_content" style="background: url(../../assets/images/home-slider-bg.jpg) center no-repeat;">
+            <h1>Mayur Synthetic Enamel</h1>
+            <p>is a Economical used in Home & Factory for protective coverage against rusting.</p>
+          </div>
+        </ion-slide> -->
+      </ion-slides>
+    </div>
+
+    <h3 class="page_title" *ngIf="userData.type==1">Your Rewards Points</h3>
+
+    <div class="reward_container" *ngIf="userData.type==1">
+      <ion-img src="../../assets/images/coins.png"></ion-img>
+      <h2>10,000</h2>
+      <ion-button>
+        <ion-icon src="../../assets/images/gift.svg"></ion-icon>
+        Redeem NOW
+      </ion-button>
+    </div>
+
+    <h3 class="page_title">Our Products</h3>
+
+    <div class="category_wrapper">
+      <ul>
+        <ng-container *ngFor="let category of categoryList">
+          <li routerLink="/product/{{category.id}}" style="background: url({{baseImageUrl+category.image}}) center no-repeat;" >
+            <p>{{category.name}}</p>
+          </li>
+        </ng-container>
+        <!-- <li routerLink="/product" style="background-image: url(../../assets/images/home-product-2.jpg);">
+          <p>Water based Product</p>
+        </li>
+        <li routerLink="/product" style="background-image: url(../../assets/images/home-product-3.jpg);">
+          <p>Power Products</p>
+        </li>
+        <li routerLink="/product" style="background-image: url(../../assets/images/home-product-4.jpg);">
+          <p>universal stainer</p>
+        </li>
+        <li routerLink="/product" style="background-image: url(../../assets/images/home-product-5.jpg);">
+          <p>thinner</p>
+        </li> -->
+      </ul>
+    </div>
+
+    <ng-container *ngIf="userData.type==1">
+      <div class="qr_scan">
+        <ion-img src="../../assets/images/qr-code.png"></ion-img>
+        <p>Scan the Qr code &  earn reward</p>
+        <button>
+          <ion-img src="../../assets/images/scanner.svg"></ion-img>
+          Scan NOw
+        </button>
+      </div>
+
+      <h3 class="page_title">Redeem your Rewards Points  <a routerLink="/gift">All Gifts</a></h3>
+
+      <div class="home_redeem_product">
+        <!-- <h3>Redeem your Rewards Points <span routerLink="/product">View All</span></h3> -->
+        <ion-slides pager="false" [options]="slideOpts">
+          <ion-slide routerLink="/productdetails">
+            <div class="home_redeem_product_item">
+              <div class="home_redeem_product_item_img">
+                <img src="../../assets/images/mxw_640,f_auto 1.png" alt="">
+              </div>
+              <div class="home_redeem_product_item_text">
+                <h4>Blackpink  for Girls</h4>
+                <span>450 Points  <img src="../../assets/images/arrow-right.png" alt=""></span>
+              </div>
+            </div>
+          </ion-slide>
+          <ion-slide routerLink="/productdetails"> 
+            <div class="home_redeem_product_item">
+              <div class="home_redeem_product_item_img">
+                <img src="../../assets/images/in-galaxy-a04s-a047-sm-a047fzcgins-thumb-533977924 1.png" alt="">
+              </div>
+              <div class="home_redeem_product_item_text">
+                <h4>Silicone Sleeve | Stylish Water Bottle</h4>
+                <span>80 Points <img src="../../assets/images/arrow-right.png" alt=""></span>
+              </div>
+            </div>
+          </ion-slide>
+          <ion-slide routerLink="/productdetails">
+            <div class="home_redeem_product_item">
+              <div class="home_redeem_product_item_img">
+                <img src="../../assets/images/7fdd3bda2076f7bdb2ed96e7ec01810a 1.png" alt="">
+              </div>
+              <div class="home_redeem_product_item_text">
+                <h4>KGA Sandwitch maker</h4>
+                <span>1500 Points  <img src="../../assets/images/arrow-right.png" alt=""></span>
+              </div>
+            </div>
+          </ion-slide>
+          <ion-slide routerLink="/productdetails">
+            <div class="home_redeem_product_item">
+              <div class="home_redeem_product_item_img">
+                <img src="../../assets/images/mxw_640,f_auto 1.png" alt="">
+              </div>
+              <div class="home_redeem_product_item_text">
+                <h4>Blackpink  for Girls</h4>
+                <span>450 Points  <img src="../../assets/images/arrow-right.png" alt=""></span>
+              </div>
+            </div>
+          </ion-slide>
+          <ion-slide routerLink="/productdetails">
+            <div class="home_redeem_product_item">
+              <div class="home_redeem_product_item_img">
+                <img src="../../assets/images/in-galaxy-a04s-a047-sm-a047fzcgins-thumb-533977924 1.png" alt="">
+              </div>
+              <div class="home_redeem_product_item_text">
+                <h4>Silicone Sleeve | Stylish Water Bottle</h4>
+                <span>80 Points <img src="../../assets/images/arrow-right.png" alt=""></span>
+              </div>
+            </div>
+          </ion-slide>
+          <ion-slide routerLink="/productdetails">
+            <div class="home_redeem_product_item">
+              <div class="home_redeem_product_item_img">
+                <img src="../../assets/images/7fdd3bda2076f7bdb2ed96e7ec01810a 1.png" alt="">
+              </div>
+              <div class="home_redeem_product_item_text">
+                <h4>KGA Sandwitch maker</h4>
+                <span>1500 Points  <img src="../../assets/images/arrow-right.png" alt=""></span>
+              </div>
+            </div>
+          </ion-slide>
+          <ion-slide routerLink="/productdetails">
+            <div class="home_redeem_product_item">
+              <div class="home_redeem_product_item_img">
+                <img src="../../assets/images/mxw_640,f_auto 1.png" alt="">
+              </div>
+              <div class="home_redeem_product_item_text">
+                <h4>Blackpink  for Girls</h4>
+                <span>450 Points  <img src="../../assets/images/arrow-right.png" alt=""></span>
+              </div>
+            </div>
+          </ion-slide>
+          <ion-slide routerLink="/productdetails">
+            <div class="home_redeem_product_item">
+              <div class="home_redeem_product_item_img">
+                <img src="../../assets/images/in-galaxy-a04s-a047-sm-a047fzcgins-thumb-533977924 1.png" alt="">
+              </div>
+              <div class="home_redeem_product_item_text">
+                <h4>Silicone Sleeve | Stylish Water Bottle</h4>
+                <span>80 Points <img src="../../assets/images/arrow-right.png" alt=""></span>
+              </div>
+            </div>
+          </ion-slide>
+          <ion-slide routerLink="/productdetails">
+            <div class="home_redeem_product_item">
+              <div class="home_redeem_product_item_img">
+                <img src="../../assets/images/7fdd3bda2076f7bdb2ed96e7ec01810a 1.png" alt="">
+              </div>
+              <div class="home_redeem_product_item_text">
+                <h4>KGA Sandwitch maker</h4>
+                <span>1500 Points  <img src="../../assets/images/arrow-right.png" alt=""></span>
+              </div>
+            </div>
+          </ion-slide>
+        </ion-slides>
+      </div>
+
+      <h3 class="page_title">Redeem History</h3>
+
+      <div class="home_redeem_history">
+        <ion-item lines="none" class="home_redeem_history_item home_redeem_history_credit">
+          <ion-avatar class="home_redeem_history_item_icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 5V19" stroke="#65B869" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M5 12H19" stroke="#65B869" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </ion-avatar>
+          <ion-label class="home_redeem_history_item_middle">
+            <h4>12th January, 2022</h4>
+            <p>Total 10,000 points earn</p>
+          </ion-label>
+          <ion-button>
+            + 12,000
+          </ion-button>
+        </ion-item>
+        <ion-item lines="none" class="home_redeem_history_item home_redeem_history_debit">
+          <ion-avatar class="home_redeem_history_item_icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 12H19" stroke="#EA1C2C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </ion-avatar>
+          <ion-label class="home_redeem_history_item_middle">
+            <h4>12th January, 2022</h4>
+            <p>You purchase Sony SLTA58KMD</p>
+          </ion-label>
+          <ion-button>
+            - 10,000
+          </ion-button>
+        </ion-item>
+      </div>
+    </ng-container>
   </div>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" routerLink="/chat" *ngIf="userData.type==2">
+    <ion-fab-button>
+      <ion-img src="../../assets/images/chat.svg"></ion-img>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

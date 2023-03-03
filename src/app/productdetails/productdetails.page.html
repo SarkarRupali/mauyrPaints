@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+     <ion-buttons slot="start">
+      <ion-menu-button>
+        <ion-icon
+          src="../../assets/images/menu.svg"
+        ></ion-icon>
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title>Product</ion-title>
+    <ion-buttons slot="end">
+      <ion-button class="notification">
+        <ion-icon
+          src="../../assets/images/notification.svg"
+        ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="product_details">
+    <div class="product_details_img_wrap">
+      <ion-img src="{{imageUrl+productdetails.image}}"></ion-img>
+    </div>
+    <h1 class="product_title">{{productdetails.name}}</h1>
+    <h5 [innerHTML]="productdetails.short_desc"></h5>
+    <div class="product_content">
+      <p [innerHTML]="productdetails.desc"></p>
+      <p><strong>Price:</strong> <span [innerHTML]="productdetails.price"></span></p>
+      <p><strong>Applied on:</strong> <span [innerHTML]="productdetails.apply_on"></span></p>
+      <p><strong>Applied by:</strong> <span [innerHTML]="productdetails.apply_by"></span></p>
+      <p><strong>Coverage:</strong> {{productdetails.coverage}}</p>
+      <p><strong>Self life:</strong> {{productdetails.self_life}}</p>
+      <p><strong>Size:</strong>{{productdetails.size}}</p>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer collapse="fade" class="ion-no-border">
+  <ion-button expand="block" routerLink="/enquire/{{productdetails.id}}">Enquire now</ion-button>
+</ion-footer>

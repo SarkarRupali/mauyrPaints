@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <ion-icon
+          src="../../assets/images/menu.svg"
+        ></ion-icon>
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title>Make Complain</ion-title>
+    <ion-buttons slot="end">
+      <ion-button></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <p>If you have any complain, please fill up the below form.</p>
+  <form [formGroup]="complainform" (ngSubmit)="complainSubmit()">
+    <!-- <ion-item lines="none">
+      <ion-input placeholder="Full Name" type="text"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-input placeholder="Contact No." type="tel"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-input placeholder="Address" type="text"></ion-input>
+    </ion-item> -->
+    <ion-item lines="none" class="textarea">
+      <ion-textarea placeholder="Message" formControlName="message" [ngClass]="{ 'is-invalid': submitted && f['message'].errors }"></ion-textarea>
+    </ion-item>
+    <div *ngIf="submitted && f['message'].errors" class="invalid-feedback">  
+      <span class="danger" *ngIf="f['message'].errors['required']">Message is required.</span>  
+      <span class="danger" *ngIf="f['message'].errors['cannotContainSpace']">Please enter message.</span>  
+    </div>
+    <ion-button expand="block" type="submit">Submit</ion-button>
+  </form>
+</ion-content>

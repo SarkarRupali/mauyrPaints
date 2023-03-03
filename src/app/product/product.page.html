@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+     <ion-buttons slot="start">
+      <!-- <ion-menu-button>
+        <ion-icon
+          src="../../assets/images/menu.svg"
+        ></ion-icon>
+      </ion-menu-button> -->
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Products</ion-title>
+    <ion-buttons slot="end">
+      <ion-button class="notification">
+        <ion-icon
+          src="../../assets/images/notification.svg"
+        ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="product">
+    <ion-row>
+      <ion-col size="6" *ngFor="let product of productList">
+        <div class="product_item" routerLink="/productdetails/{{product.id}}">
+          <div class="product_item_img">
+            <img src="{{product.image}}" alt="">
+          </div>
+          <div class="product_item_text">
+            <h4>{{product.product_name}} <img src="../../assets/images/arrow-right.png" alt=""></h4>
+          </div>
+        </div>
+      </ion-col>
+      
+      <!-- <ion-col size="6">
+        <div class="product_item" routerLink="/productdetails">
+          <div class="product_item_img">
+            <img src="../../assets/images/product6.jpg" alt="">
+          </div>
+          <div class="product_item_text">
+            <h4>Water proof cement primer <img src="../../assets/images/arrow-right.png" alt=""></h4>
+          </div>
+        </div>
+      </ion-col> -->
+    </ion-row>
+    <ng-container *ngIf="productList.length==0">
+      <p>There is no product</p>
+    </ng-container>
+  </div>
+</ion-content>

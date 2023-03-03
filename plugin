@@ -1,0 +1,31 @@
+Camera :
+	ionic cordova plugin add cordova-plugin-camera
+	npm install @ionic-native/camera
+File transfer :
+	cordova plugin add https://github.com/apache/cordova-plugin-file-transfer.git
+	npm install @ionic-native/file-transfer
+
+Filr : 
+	ionic cordova plugin add cordova-plugin-file
+	npm i @ionic-native/file
+	
+To solve camera plugin issue : 
+	npm install @ionic-native/core
+	
+	
+Moment
+	npm i moment
+	
+	
+	Customer Login :
+	ph : 7778888881
+	pass : Pa$$w0rd!
+	
+	SellsPerson Login :
+	ph : 9804885561
+	pass : 12345678
+	
+	Painter Login :
+	ph : 9800864081
+	pass : 12345678
+

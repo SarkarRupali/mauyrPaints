@@ -1,0 +1,47 @@
+ion-header{
+  &::after{
+    display: none;
+  }
+  ion-toolbar{
+    --background:var(--ion-color-alizarin-contrast);
+
+    ion-title{
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--ion-color-light-contrast);
+    }
+    ion-button{
+      &.notification {
+          height: 48px;
+          width: 48px;
+          margin: 0;
+          --border-radius: 50%;
+      }
+    }
+  }
+}
+
+ion-content{
+  --padding-start:16px;
+  --padding-end:16px;
+  --padding-top:16px;
+  --background:#F4F8F9;
+  ion-row{
+    margin-left: -8px;
+    margin-right: -8px;
+    ion-col{
+      padding-top: 0;
+      padding-bottom: 0;
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+    .brochure_item{
+      margin-bottom: 16px;
+      &_img{
+        img{
+          display: block;
+        }
+      }
+    }
+  }
+}

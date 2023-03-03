@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar>
+     <ion-buttons slot="start">
+      <ion-back-button>
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>Profile Edit</ion-title>
+   
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="profileEditForm" (ngSubmit)="edit()">
+    <div class="profile_top_img">
+      <img src="" alt="">
+      <ion-button (click)="imageAdd()">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_67_508)">
+          <path d="M11.3333 2.00001C11.5083 1.82491 11.7162 1.68602 11.945 1.59126C12.1738 1.4965 12.419 1.44772 12.6666 1.44772C12.9142 1.44772 13.1594 1.4965 13.3882 1.59126C13.617 1.68602 13.8248 1.82491 13.9999 2.00001C14.175 2.1751 14.3139 2.38297 14.4087 2.61175C14.5034 2.84052 14.5522 3.08572 14.5522 3.33334C14.5522 3.58096 14.5034 3.82616 14.4087 4.05494C14.3139 4.28371 14.175 4.49158 13.9999 4.66668L4.99992 13.6667L1.33325 14.6667L2.33325 11L11.3333 2.00001Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+          <defs>
+            <clipPath id="clip0_67_508">
+              <rect width="16" height="16" fill="white"/>
+            </clipPath>
+          </defs>
+        </svg>
+        <input type="file" name="" id="">
+      </ion-button>
+    </div>
+    <!-- <ion-item lines="none">
+      <ion-input placeholder="Retailer ID" type="text"></ion-input>
+    </ion-item> -->
+    <ion-item lines="none">
+      <ion-img src="../../assets/images/Frame.svg"></ion-img>
+      <ion-input placeholder="Full Name" type="text" formControlName="name" [ngClass]="{ 'is-invalid': submitted && f['name'].errors }"></ion-input>
+    </ion-item>
+    <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">  
+      <span class="danger" *ngIf="f['name'].errors['required']">Full Name is required.</span>  
+      <span class="danger" *ngIf="f['name'].errors['pattern']">Please enter valid full name.</span>  
+    </div>
+
+    <ion-item lines="none">
+      <ion-img src="../../assets/images/Frame.svg"></ion-img>
+      <ion-input placeholder="Email" type="email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"></ion-input>
+    </ion-item>
+    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">  
+      <span class="danger" *ngIf="f['email'].errors['pattern']">Please enter valid email.</span>  
+    </div>
+
+    <ion-item lines="none">
+      <ion-img src="../../assets/images/Frame2.svg"></ion-img>
+      <ion-input formControlName="mobile" type="tel" maxlength="10" placeholder="Phone Number" [ngClass]="{ 'is-invalid': submitted && f['mobile'].errors }"></ion-input>
+    </ion-item>
+    <div *ngIf="submitted && f['mobile'].errors" class="invalid-feedback">  
+      <span class="danger" *ngIf="f['mobile'].errors['required']">Phone number is required.</span>  
+      <span class="danger" *ngIf="f['mobile'].errors['pattern']">Please enter valid phone number.</span>  
+    </div>
+
+    <ion-item lines="none">
+      <ion-img src="../../assets/images/Frame2.svg"></ion-img>
+      <ion-input placeholder="Whatsapp No." type="tel" maxlength="10" formControlName="whatsapp_no" [ngClass]="{ 'is-invalid': submitted && f['whatsapp_no'].errors }"></ion-input>
+    </ion-item>
+    <div *ngIf="submitted && f['whatsapp_no'].errors" class="invalid-feedback">  
+      <span class="danger" *ngIf="f['whatsapp_no'].errors['required']">Whatsapp number is required.</span>  
+      <span class="danger" *ngIf="f['whatsapp_no'].errors['pattern']">Please enter valid whatsapp number.</span>  
+    </div>
+
+    <ion-item lines="none">
+      <ion-img src="../../assets/images/Frame.svg"></ion-img>
+      <ion-input placeholder="Address" type="text" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f['address'].errors }"></ion-input>
+    </ion-item>
+    <div *ngIf="submitted && f['address'].errors" class="invalid-feedback">  
+      <span class="danger" *ngIf="f['address'].errors['required']">Address is required.</span>  
+      <span class="danger" *ngIf="f['address'].errors['cannotContainSpace']">Please enter valid address.</span>  
+    </div>
+
+   
+   
+    
+    <ion-button expand="block" type="submit">Edit</ion-button>
+    <ion-button expand="block" (click)="cancel()">Cancel</ion-button>
+  </form>
+</ion-content>
+

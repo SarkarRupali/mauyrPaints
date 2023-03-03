@@ -1,3 +1,65 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-split-pane contentId="main-content">
+    <ion-menu contentId="main-content" type="overlay">
+      <ion-content>
+          <div class="slideprofile">
+              <div class="slideprofile_logo">
+                <img src="../assets/images/logo.png" alt="" srcset="">
+                <!-- <img src="https://ui-avatars.com/api/?color=ED2E36&background=F4F8F9&bold=true&name=Joydeep+Paul" alt=""> -->
+              </div>
+              <div class="slideprofile_text">
+                <h3>Hi, {{userDetails.name}}!</h3>
+                <p *ngIf="userDetails.email">{{userDetails.email}}</p>
+              </div>
+          </div>
+          <ion-menu-toggle auto-hide="false">
+            <div class="menus">
+              <ion-item detail="true" lines="none" routerLink="/home" routerLinkActive="selected">
+                <ion-avatar>
+                  <img src="../assets/images/menu_home.png" alt="">
+                </ion-avatar>
+                <ion-label>Home</ion-label>
+              </ion-item>
+              <ion-item detail="true" lines="none" routerLink="/about" routerLinkActive="selected">
+                <ion-avatar>
+                  <img src="../assets/images/menu_home.png" alt="">
+                </ion-avatar>
+                <ion-label>About Us</ion-label>
+              </ion-item>
+              <ion-item detail="true" lines="none" routerLink="/profile">
+                <ion-avatar>
+                  <img src="../assets/images/menu_profile.png" alt="">
+                </ion-avatar>
+                <ion-label>My Profile</ion-label>
+              </ion-item>
+              <ion-item detail="true" lines="none" routerLink="/gift" *ngIf="userDetails.type==1">
+                <ion-avatar>
+                  <img src="../assets/images/menu_reward.png" alt="">
+                </ion-avatar>
+                <ion-label>Reward</ion-label>
+              </ion-item>
+              <ion-item detail="true" lines="none" routerLink="/complain">
+                <ion-avatar>
+                  <img src="../assets/images/menu_brochure.png" alt="">
+                </ion-avatar>
+                <ion-label>Make Complain</ion-label>
+              </ion-item> 
+            </div>
+          </ion-menu-toggle>
+      </ion-content>
+      <ion-footer>
+        <ion-toolbar class="footermenus">
+          <ion-menu-toggle auto-hide="false">
+          <ion-item detail="true" lines="none" (click)="logOut()">
+            <ion-avatar>
+              <img src="../assets/images/menu_logout.png" alt="">
+            </ion-avatar>
+            <ion-label>Log Out</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        </ion-toolbar>
+      </ion-footer>
+    </ion-menu>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
 </ion-app>

@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+     <ion-buttons slot="start">
+      <ion-menu-button>
+        <ion-icon
+          src="../../assets/images/menu.svg"
+        ></ion-icon>
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title>Message</ion-title>
+   
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngFor="let list of messageList">
+    <ion-item class="user-end" *ngIf="list.receiver_id==0">
+      <div class="chat_content">
+        <ion-label>
+          <p>{{list.message}}</p>
+        </ion-label>
+        <ion-note>{{list.daysago}}</ion-note>
+      </div>
+    </ion-item>
+    <ion-item class="client-end" *ngIf="list.sender_id==0">
+      <div class="chat_content">
+        <ion-label>
+          <p>{{list.message}}</p>
+        </ion-label>
+        <ion-note>{{list.daysago}}</ion-note>
+      </div>
+    </ion-item>
+    <!-- <ion-item class="user-end">
+      <div class="chat_content">
+        <ion-label>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod...</p>
+        </ion-label>
+        <ion-note>3min ago</ion-note>
+      </div>
+    </ion-item> -->
+  </ion-list>
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-item>
+      <ion-textarea [autoGrow]="true" rows="1" placeholder="Enter message here" [(ngModel)]="message"></ion-textarea>
+    </ion-item>
+    <ion-button slot="end" expand="block" color="milegreen" (click)="sendMessage()">
+      <ion-img src="../../assets/images/send.svg"></ion-img>
+    </ion-button>
+    <ion-button slot="end" expand="block" color="milegreen" (click)="uploadDoc()">
+      doc
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
