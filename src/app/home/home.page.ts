@@ -5,6 +5,7 @@ import { NavController } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
 import { HelperService } from '../services/helper.service';
 import { environment } from 'src/environments/environment';
+import * as moment from 'moment';
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -41,6 +42,10 @@ export class HomePage implements OnInit {
     // this._helper.startLoading();
     this.getBanner();
     this.getCategory();
+
+  }
+
+  ionViewWillEnter() {
     if (this.userData.type == 1) {
       this.painterData()
     }
@@ -80,6 +85,9 @@ export class HomePage implements OnInit {
         this.top5GiftList = res.rewardproduct;
         this.userPoints = res.userPoints;
         this.lastHistory = res.history;
+        this.lastHistory.forEach((el: any) => {
+          el.date = moment(el.created_at).format("Do MMMM, yyyy");
+        });
         this._helper.dismissLoader();
       } else {
         this._helper.dismissLoader();
@@ -117,8 +125,11 @@ export class HomePage implements OnInit {
             this.navCtrl.navigateForward('/reward')
           } else {
             this._helper.dismissLoader();
-            this._helper.alertToast('Something went wrong. Please try again')
+            this._helper.alertToast(res.resp)
           }
+        }, err => {
+          this._helper.dismissLoader();
+          this._helper.alertToast('Something went wrong. Please try again')
         })
       }
 

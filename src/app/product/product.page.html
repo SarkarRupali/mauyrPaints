@@ -9,7 +9,7 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Products</ion-title>
-    <ion-buttons slot="end">
+    <ion-buttons slot="end" *ngIf="userData?.type==2">
       <ion-button class="notification">
         <ion-icon
           src="../../assets/images/notification.svg"

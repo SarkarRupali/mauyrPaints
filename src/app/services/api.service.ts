@@ -52,14 +52,27 @@ export class ApiService {
 
   // add rewards using qrcode
   addRewardPointsUsingQRCode(qrData: any) {
-    return this.http.post<any>(baseURl + `QRcode/`, qrData)
+    return this.http.post<any>(baseURl + 'QRcode', qrData)
   }
 
+  //redeem rewars
+  redeemPoints(redeemData: any) {
+    return this.http.post<any>(baseURl + 'place/order', redeemData)
+  }
+
+  //get total points
+  gettotalrewardPoints(userId: any) {
+    return this.http.get<any>(baseURl + `wallet/balance/${userId}`)
+  }
   // get rewards
   getRewards(data: any) {
     return this.http.post<any>(baseURl + `reward/history`, data)
   }
 
+  // get all transaction
+  getAllTransaction(transactionData: any) {
+    return this.http.post<any>(baseURl + `transaction/history`, transactionData)
+  }
 
   /****************************************  Customer ********************************************/
   registerWithCustomer(registerData: any) {

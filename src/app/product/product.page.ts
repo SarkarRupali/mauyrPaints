@@ -11,6 +11,7 @@ import { HelperService } from '../services/helper.service';
 export class ProductPage implements OnInit {
   categoryId: any = 0;
   productList: any = [];
+  userData: any;
 
   constructor(private activtedRoute: ActivatedRoute, private _api: ApiService, private _helper: HelperService) { }
 
@@ -18,6 +19,7 @@ export class ProductPage implements OnInit {
   }
 
   ionViewWillEnter() {
+    this.userData = JSON.parse(localStorage.getItem('MAURY_User') || '{}');
     this.categoryId = this.activtedRoute.snapshot.paramMap.get('categoryId');
     if (this.categoryId) {
       this.getProductList()

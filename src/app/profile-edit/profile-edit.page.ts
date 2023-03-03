@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { NavController } from '@ionic/angular';
+import { ActionSheetController, NavController } from '@ionic/angular';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 
 import { SpaceValidatior } from '../services/space.validator';
 import { ApiService } from '../services/api.service';
 import { HelperService } from '../services/helper.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -16,8 +19,10 @@ export class ProfileEditPage implements OnInit {
   profileEditForm !: FormGroup;
   userDetails: any;
   submitted = false;
+  profileimg = '';
+  baseImageUrl = environment.baseImageUrl;
 
-  constructor(private _api: ApiService, private _helper: HelperService, private navCtrl: NavController) { }
+  constructor(private _api: ApiService, private _helper: HelperService, private navCtrl: NavController, private actionSheetController: ActionSheetController, private camera: Camera, private transfer: FileTransfer) { }
 
   ngOnInit() {
     this.profileEditForm = new FormGroup({
@@ -26,7 +31,7 @@ export class ProfileEditPage implements OnInit {
       mobile: new FormControl('', [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]),
       whatsapp_no: new FormControl('', [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]),
       address: new FormControl('', [Validators.required, SpaceValidatior.cannotContainSpace]),
-
+      image: new FormControl(''),
     })
   }
 
@@ -46,9 +51,86 @@ export class ProfileEditPage implements OnInit {
   }
 
   // Method call to add profile image
-  imageAdd() {
-
+  async imageAdd() {
+    const actionSheet = await this.actionSheetController.create({
+      buttons: [{
+        text: 'Take a Photo',
+        icon: 'camera-outline',
+        handler: () => {
+          /* *************** CAMERA SELECTED ********************** */
+          this.takePhoto(1);
+        }
+      }, {
+        text: 'Pick From Gallery',
+        icon: 'image-outline',
+        handler: () => {
+          /* *************** Gallary SELECTED ********************** */
+          this.takePhoto(0);//photo library
+        }
+      },
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        icon: 'close',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
   }
+
+  /**
+   * Method is call to upload image on server and database
+   * @param sourceType 
+  */
+
+  takePhoto(sourceType: number) {
+    const options: CameraOptions = {
+      quality: 50,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      sourceType: sourceType,
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+      console.log('imageData', imageData);
+      let imageURI = imageData;
+      if (imageURI != "") {
+        this._helper.startLoading();
+        const fileTransfer: FileTransferObject = this.transfer.create();
+        console.log('fileTransfer', fileTransfer);
+        let options1: FileUploadOptions = {
+          fileKey: 'image',
+          chunkedMode: false,
+          mimeType: "image/jpeg, image/png", // add mimeType
+          headers: {},
+          params: { "image": imageURI },
+          httpMethod: 'POST'
+        }
+        fileTransfer.upload(imageURI, 'https://mayurpaints.dev91.website/api/image/upload', options1)
+          .then((data) => {
+            console.log('data2', data);
+            let value = JSON.parse(data.response);
+            console.log('value', value);
+            console.log('image', value.data);
+            this.profileimg = value.data;
+            this.profileEditForm.patchValue({
+              image: this.profileimg
+            })
+            this._helper.dismissLoader();
+          }, (err) => {
+            console.log('error', err);
+            this._helper.dismissLoader();
+          });
+      }
+    }, (err) => {
+      // Handle error
+    });
+  }
+
 
   edit() {
     this.submitted = true;

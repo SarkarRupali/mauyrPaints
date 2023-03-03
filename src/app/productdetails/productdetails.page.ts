@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 export class ProductdetailsPage implements OnInit {
   productId: any;
   productdetails: any = {};
+  userdata: any
   imageUrl = environment.baseImageUrl;
   constructor(private activatedRoute: ActivatedRoute, private _api: ApiService, private _helper: HelperService) { }
 
@@ -20,6 +21,7 @@ export class ProductdetailsPage implements OnInit {
   }
   ionViewWillEnter() {
     this.productId = this.activatedRoute.snapshot.paramMap.get('productId')
+    this.userdata = JSON.parse(localStorage.getItem('MAURY_User') || '')
     if (this.productId) {
       this.getProductDetails()
     }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+import { File } from '@ionic-native/file/ngx';
 
 import { ApiService } from '../services/api.service';
 import { environment } from 'src/environments/environment';
@@ -22,7 +23,7 @@ export class ChatPage implements OnInit {
   messageList: any = [];
   baseImageUrl = environment.baseImageUrl;
 
-  constructor(private _api: ApiService, private actionSheetController: ActionSheetController, private camera: Camera, private transfer: FileTransfer, private _helper: HelperService) { }
+  constructor(private _api: ApiService, private actionSheetController: ActionSheetController, private camera: Camera, private transfer: FileTransfer, private _helper: HelperService, private file: File) { }
 
   ngOnInit() {
     this.userId = JSON.parse(localStorage.getItem('MAURY_User') || '').id;
@@ -170,4 +171,29 @@ export class ChatPage implements OnInit {
   }
 
 
+  /**
+   * Method call to download image or doc or file after clicking 
+   **/
+  download(pdfUrl: any) {
+    console.log(pdfUrl);
+
+    let pdfPath = this.baseImageUrl + pdfUrl;
+    const filename = pdfUrl.split("/");
+    console.log(filename[filename.length - 1]);
+
+    const fileTransfer: FileTransferObject = this.transfer.create();
+    console.log('file', this.file);
+
+    fileTransfer.download(pdfPath, this.file.externalRootDirectory +
+      '/Download/' + filename[filename.length - 1]).then(response => {
+        console.log(response);
+        this._helper.dismissLoader();
+        this._helper.alertToast('File has been downloaded to the Downloads folder. View it..')
+      })
+      .catch(err => {
+        this._helper.dismissLoader();
+        this._helper.alertToast('Something went wrong. please try again.')
+        console.log(err)
+      });
+  }
 }

@@ -23,12 +23,12 @@
     <h5>{{giftDetials.short_desc}}</h5>
     <div class="product_content">
       <p>{{giftDetials.desc}}</p>
-      <p><strong>Quantity:</strong> 1</p>
+      <p><strong>Quantity:</strong> <span> <ion-icon name="add-outline" (click)="addquantity()"></ion-icon></span>{{quantity}}<span><ion-icon name="remove-outline" (click)="removeQuantity()"></ion-icon></span></p>
       <p><strong>Points:</strong> {{giftDetials.points}}</p>
     </div>
   </div>
 </ion-content>
 
 <ion-footer collapse="fade" class="ion-no-border">
-  <ion-button expand="block">Get it Now</ion-button>
+  <ion-button expand="block" (click)="purchaseGifts()"> Get it Now</ion-button>
 </ion-footer>

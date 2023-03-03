@@ -75,6 +75,7 @@ export class PartnerFormPage implements OnInit {
     }
   }
 
+  //Method call to upload document
   async fileUpload() {
     const actionSheet = await this.actionSheetController.create({
       buttons: [{

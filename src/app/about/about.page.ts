@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./about.page.scss'],
 })
 export class AboutPage implements OnInit {
+  userData: any;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
+    this.userData = JSON.parse(localStorage.getItem('MAURY_User') || '')
   }
 
 }

@@ -49,7 +49,7 @@
     <div class="reward_container" *ngIf="userData.type==1">
       <ng-container *ngIf="userPoints!=0;else rewardBlock">
         <ion-img src="../../assets/images/coins.png"></ion-img>
-        <h2>10,000</h2>
+        <h2>{{userPoints}}</h2>
         <ion-button routerLink="/gift">
           <ion-icon src="../../assets/images/gift.svg"></ion-icon>
           Redeem NOW
@@ -96,7 +96,7 @@
         </button>
       </div>
 
-      <h3 class="page_title">Redeem your Rewards Points  <a routerLink="/gift">All Gifts</a></h3>
+      <h3 class="page_title">Redeem your Rewards Points  <a routerLink="/gift" style="float: right;">All Gifts</a></h3>
 
       <div class="home_redeem_product">
         <!-- <h3>Redeem your Rewards Points <span routerLink="/product">View All</span></h3> -->
@@ -127,10 +127,10 @@
         </ion-slides>
       </div>
 
-      <h3 class="page_title">Redeem History</h3>
-
-      <div class="home_redeem_history">
-        <ion-item lines="none" class="home_redeem_history_item home_redeem_history_credit">
+      <h3 class="page_title">Redeem History <span style="float: right;" routerLink="/history">All</span></h3>
+     
+      <div class="home_redeem_history" *ngFor="let history of lastHistory">
+        <ion-item lines="none" class="home_redeem_history_item home_redeem_history_credit" *ngIf="history.status=='increment'">
           <ion-avatar class="home_redeem_history_item_icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 5V19" stroke="#65B869" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -138,25 +138,28 @@
             </svg>
           </ion-avatar>
           <ion-label class="home_redeem_history_item_middle">
-            <h4>12th January, 2022</h4>
-            <p>Total 10,000 points earn</p>
+            <!-- <h4>12th January, 2022</h4> -->
+            <h4>{{history.date}}</h4>
+            <p>{{history.title}}</p>
+            <p>{{history.desc}}</p>
           </ion-label>
           <ion-button>
-            + 12,000
+            + {{history.amount}}
           </ion-button>
         </ion-item>
-        <ion-item lines="none" class="home_redeem_history_item home_redeem_history_debit">
+        <ion-item lines="none" class="home_redeem_history_item home_redeem_history_debit" *ngIf="history.status=='decrement'">
           <ion-avatar class="home_redeem_history_item_icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M5 12H19" stroke="#EA1C2C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </ion-avatar>
           <ion-label class="home_redeem_history_item_middle">
-            <h4>12th January, 2022</h4>
-            <p>You purchase Sony SLTA58KMD</p>
+            <h4>{{history.date}}</h4>
+            <p>{{history.title}}</p>
+            <p>{{history.desc}}</p>
           </ion-label>
           <ion-button>
-            - 10,000
+            - {{history.amount}}
           </ion-button>
         </ion-item>
       </div>

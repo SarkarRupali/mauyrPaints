@@ -17,7 +17,12 @@
     <ion-item class="user-end" *ngIf="list.receiver_id==0">
       <div class="chat_content">
         <ion-label>
-          <p>{{list.message}}</p>
+          <ng-container *ngIf="list.flag=='text';else imageBlock">
+            <p>{{list.message}}</p>
+          </ng-container>
+          <ng-template #imageBlock>
+            <img src="{{baseImageUrl + list.message}}"/><span (click)="download(list.message)">Download</span>
+          </ng-template>
         </ion-label>
         <ion-note>{{list.daysago}}</ion-note>
       </div>
@@ -25,7 +30,12 @@
     <ion-item class="client-end" *ngIf="list.sender_id==0">
       <div class="chat_content">
         <ion-label>
-          <p>{{list.message}}</p>
+          <ng-container *ngIf="list.flag=='text';else imageBlock">
+            <p>{{list.message}}</p>
+          </ng-container>
+          <ng-template #imageBlock>
+            <img src="{{baseImageUrl + list.message}}"/><span (click)="download(list.message)">Download</span>
+          </ng-template>
         </ion-label>
         <ion-note>{{list.daysago}}</ion-note>
       </div>

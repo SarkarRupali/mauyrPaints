@@ -44,10 +44,7 @@ const routes: Routes = [
     path: 'about',
     loadChildren: () => import('./about/about.module').then(m => m.AboutPageModule)
   },
-  {
-    path: 'brochure',
-    loadChildren: () => import('./brochure/brochure.module').then(m => m.BrochurePageModule)
-  },
+
   {
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule)

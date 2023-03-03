@@ -3,6 +3,7 @@ import { NavController } from '@ionic/angular';
 
 import { ApiService } from '../services/api.service';
 import { HelperService } from '../services/helper.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -13,6 +14,8 @@ import { HelperService } from '../services/helper.service';
 export class ProfilePage implements OnInit {
   userId: any = 0;
   profileDetails: any;
+  baseImageUrl = environment.baseImageUrl;
+
   constructor(private _api: ApiService, private _helper: HelperService, private navCtrl: NavController) { }
 
   ngOnInit() { }
