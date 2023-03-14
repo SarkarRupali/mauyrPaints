@@ -31,7 +31,7 @@
     </ion-item>
     <div *ngIf="submitted && f['message'].errors" class="invalid-feedback">  
       <span class="danger" *ngIf="f['message'].errors['required']">Message is required.</span>  
-      <span class="danger" *ngIf="f['message'].errors['cannotContainSpace']">Please enter message.</span>  
+      <!-- <span class="danger" *ngIf="f['message'].errors['cannotContainSpace']">Please enter message.</span>   -->
     </div>
     <ion-button expand="block" type="submit">Submit</ion-button>
   </form>

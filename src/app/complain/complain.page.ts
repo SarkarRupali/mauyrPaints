@@ -15,12 +15,15 @@ export class ComplainPage implements OnInit {
   userdetails: any;
   submitted = false;
 
-  constructor(private _helper: HelperService, private _api: ApiService) { }
+  constructor(private _helper: HelperService, private _api: ApiService) {
+    this.complainform = new FormGroup({
+      // message: new FormControl('', [Validators.required, SpaceValidatior.cannotContainSpace])
+      message: new FormControl('', Validators.required)
+    })
+  }
 
   ngOnInit() {
-    this.complainform = new FormGroup({
-      message: new FormControl('', [Validators.required, SpaceValidatior.cannotContainSpace])
-    })
+
 
   }
 
@@ -30,7 +33,7 @@ export class ComplainPage implements OnInit {
 
   ionViewWillEnter() {
     this.userdetails = JSON.parse(localStorage.getItem('MAURY_User') || '{}')
-
+    console.log('userdetails', this.userdetails)
   }
 
   // Method call to submit enquiry form

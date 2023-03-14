@@ -21,12 +21,25 @@
             <p>{{list.message}}</p>
           </ng-container>
           <ng-template #imageBlock>
-            <img src="{{baseImageUrl + list.message}}"/><span (click)="download(list.message)">Download</span>
+            <ng-container *ngIf="list.file_extension=='.jpg'||list.file_extension=='.jpeg'||list.file_extension=='.png'||list.file_extension=='.svg'||list.file_extension=='.gif'||list.file_extension=='.bmp';else docBlock">
+              <ion-button (click)="download(list.message)" class="download_chatimg"><ion-icon src="../../assets/images/download.svg"></ion-icon></ion-button>
+              <img src="{{baseImageUrl + list.message}}"/>
+            </ng-container>
+
+            <ng-template #docBlock>
+              <div class="chat_document">
+                <ion-button (click)="download(list.message)" class="download_chatimg"><ion-icon src="../../assets/images/download.svg"></ion-icon></ion-button>
+                <ion-icon src="../../assets/images/docfile.svg"></ion-icon>
+                <span>{{list.filename}}</span>
+              </div>
+            </ng-template>
+            
           </ng-template>
         </ion-label>
         <ion-note>{{list.daysago}}</ion-note>
       </div>
     </ion-item>
+
     <ion-item class="client-end" *ngIf="list.sender_id==0">
       <div class="chat_content">
         <ion-label>
@@ -34,7 +47,18 @@
             <p>{{list.message}}</p>
           </ng-container>
           <ng-template #imageBlock>
-            <img src="{{baseImageUrl + list.message}}"/><span (click)="download(list.message)">Download</span>
+            <ng-container *ngIf="list.file_extension=='.jpg'||list.file_extension=='.jpeg'||list.file_extension=='.png'||list.file_extension=='.svg'||list.file_extension=='.gif'||list.file_extension=='.bmp';else docBlock">
+              <ion-button (click)="download(list.message)" class="download_chatimg"><ion-icon src="../../assets/images/download.svg"></ion-icon></ion-button>
+              <img src="{{baseImageUrl + list.message}}"/>
+            </ng-container>
+
+            <ng-template #docBlock>
+              <div class="chat_document">
+                <ion-button (click)="download(list.message)" class="download_chatimg"><ion-icon src="../../assets/images/download.svg"></ion-icon></ion-button>
+                <ion-icon src="../../assets/images/docfile.svg"></ion-icon>
+                <span>{{list.filename}}</span>
+              </div>
+            </ng-template>            
           </ng-template>
         </ion-label>
         <ion-note>{{list.daysago}}</ion-note>

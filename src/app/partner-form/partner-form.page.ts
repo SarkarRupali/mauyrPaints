@@ -33,7 +33,8 @@ export class PartnerFormPage implements OnInit {
 
   ngOnInit() {
     this.painterForm = this.formBuilder.group({
-      name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]+ [a-zA-Z]+$')]),
+      // name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]+ [a-zA-Z]+$')]),
+      name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z][a-zA-Z ]+$')]),
       email: new FormControl('', Validators.pattern('^[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,3}$')),
       mobile: new FormControl('', [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]),
       whatsapp_no: new FormControl('', [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]),

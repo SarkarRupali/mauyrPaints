@@ -120,4 +120,13 @@ ion-header{
       width: 48px;
     }
   }
+
+  .invalid-feedback{
+    margin-top: -20px;
+    margin-bottom: 15px;  
+    .danger{
+      color: var(--ion-color-salmon);
+      font-size: 13px;
+    }
+  }
   

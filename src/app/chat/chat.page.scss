@@ -40,9 +40,42 @@ ion-content {
                 ion-label {
                     background: #F4F8F9;
                     border-radius: 10px 10px 0px 10px;
+                    position: relative;
+                    overflow: visible;
                 }
                 ion-note {
                     text-align: right;
+                }
+                .download_chatimg{
+                    position: absolute;
+                    right: calc(100% + 10px);
+                    width: 30px;
+                    height: 30px;
+                    --border-radius: 50%;
+                    --background: var(--ion-color-salmon);
+                    --padding-end: 0;
+                    --padding-start: 0;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    --box-shadow: 1px 2px 2px #00000026;
+
+                    ion-icon{
+                        font-size: 16px !important;
+                    }
+                }
+                .chat_document{
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-items: center;
+
+                    ion-icon{
+                        font-size: 35px;
+                        color: #888;
+                    }
+                    span{
+                        font-size: 12px;
+                        padding-left: 6px;
+                    }
                 }
             }
 
@@ -52,6 +85,21 @@ ion-content {
                     border-radius: 10px 10px 10px 0px;
                     margin-right: auto;
                     margin-left: 0;
+                    position: relative;
+                    overflow: visible;
+                }
+                .download_chatimg{
+                    position: absolute;
+                    left: calc(100% + 10px);
+                    width: 30px;
+                    height: 30px;
+                    --border-radius: 50%;
+                    --background: var(--ion-color-salmon);
+                    --padding-end: 0;
+                    --padding-start: 0;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    --box-shadow: 1px 2px 2px #00000026;
                 }
                 ion-note {
                     text-align: left;

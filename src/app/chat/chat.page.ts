@@ -3,6 +3,8 @@ import { ActionSheetController } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
+import { FileChooser } from '@ionic-native/file-chooser/ngx';
+import { FilePath } from '@ionic-native/file-path/ngx';
 
 import { ApiService } from '../services/api.service';
 import { environment } from 'src/environments/environment';
@@ -23,7 +25,7 @@ export class ChatPage implements OnInit {
   messageList: any = [];
   baseImageUrl = environment.baseImageUrl;
 
-  constructor(private _api: ApiService, private actionSheetController: ActionSheetController, private camera: Camera, private transfer: FileTransfer, private _helper: HelperService, private file: File) { }
+  constructor(private _api: ApiService, private actionSheetController: ActionSheetController, private camera: Camera, private transfer: FileTransfer, private _helper: HelperService, private file: File, private chooser: FileChooser, private filePath: FilePath) { }
 
   ngOnInit() {
     this.userId = JSON.parse(localStorage.getItem('MAURY_User') || '').id;
@@ -50,9 +52,13 @@ export class ChatPage implements OnInit {
         this.messageList = res.data;
         this.messageList.forEach((el: any) => {
           let day = moment(el.created_at).format('ddd MMM DD yyyy, hh:mm:ss a')
-          console.log(day);
+          el.daysago = moment(day).fromNow();
+          if (el.flag == "document") {
+            let name = el.message.split("document/")
+            console.log('name', name);
 
-          el.daysago = moment(day).fromNow()
+            el.filename = name[1]
+          }
         });
 
       }
@@ -94,6 +100,14 @@ export class ChatPage implements OnInit {
         }
       },
       {
+        text: 'Document Upload',
+        icon: 'image-outline',
+        handler: () => {
+          /* *************** Selected for file ********************** */
+          this.uploadWarrantyDoc();//phone library
+        }
+      },
+      {
         text: 'Cancel',
         role: 'cancel',
         icon: 'close',
@@ -125,29 +139,30 @@ export class ChatPage implements OnInit {
       this.imageURI = imageData;
       if (this.imageURI != "") {
         this._helper.startLoading();
-        const fileTransfer: FileTransferObject = this.transfer.create();
-        console.log('fileTransfer', fileTransfer);
-        let options1: FileUploadOptions = {
-          fileKey: 'message',
-          chunkedMode: false,
-          mimeType: "", // add mimeType
-          headers: {},
-          params: { "message": this.imageURI },
-          httpMethod: 'POST'
-        }
-        fileTransfer.upload(this.imageURI, 'https://mayurpaints.dev91.website/api/chat/document', options1)
-          .then((data) => {
-            console.log('data2', data);
-            let value = JSON.parse(data.response);
-            console.log('value', value);
-            console.log('image', value.data);
-            this.message = value.data;
-            this.type = 'document';
-            this._helper.dismissLoader();
-          }, (err) => {
-            console.log('error', err);
-            this._helper.dismissLoader();
-          });
+        // const fileTransfer: FileTransferObject = this.transfer.create();
+        // console.log('fileTransfer', fileTransfer);
+        // let options1: FileUploadOptions = {
+        //   fileKey: 'message',
+        //   chunkedMode: false,
+        //   mimeType: "", // add mimeType
+        //   headers: {},
+        //   params: { "message": this.imageURI },
+        //   httpMethod: 'POST'
+        // }
+        // fileTransfer.upload(this.imageURI, 'https://mayurpaints.dev91.website/api/chat/document', options1)
+        //   .then((data) => {
+        //     console.log('data2', data);
+        //     let value = JSON.parse(data.response);
+        //     console.log('value', value);
+        //     console.log('image', value.data);
+        //     this.message = value.data;
+        //     this.type = 'document';
+        //     this._helper.dismissLoader();
+        //   }, (err) => {
+        //     console.log('error', err);
+        //     this._helper.dismissLoader();
+        //   });
+        this.upload(this.imageURI)
       }
     }, (err) => {
       // Handle error
@@ -155,11 +170,57 @@ export class ChatPage implements OnInit {
   }
 
 
+
+
+  /**
+   * Method call 
+   */
+
+  uploadWarrantyDoc() {
+    this.chooser.open().then(uri => {
+      this.filePath.resolveNativePath(uri).then(filePath => {
+
+        this.upload(filePath);
+      })
+        .catch(() => {
+          console.log('Error reading path');
+        });
+    }).catch(e => {
+      console.log(e);
+    });
+  }
+
+  upload(url: any) {
+    const fileTransfer: FileTransferObject = this.transfer.create();
+    console.log('fileTransfer', fileTransfer);
+    let options1: FileUploadOptions = {
+      fileKey: 'message',
+      chunkedMode: false,
+      mimeType: "", // add mimeType
+      headers: {},
+      params: { "message": url },
+      httpMethod: 'POST'
+    }
+    fileTransfer.upload(url, 'https://mayurpaints.dev91.website/api/chat/document', options1)
+      .then((data) => {
+        console.log('data2', data);
+        let value = JSON.parse(data.response);
+        this.message = value.data;
+        this.type = 'document';
+        this._helper.dismissLoader();
+      }, (err) => {
+        console.log('error', err);
+        this._helper.dismissLoader();
+      });
+  }
+
   createMessage() {
+    let extension = this.message.split(".")
     let data = {
       "channel_id": this.channleId,
       "sender_id": this.userId,
       "message": this.message,
+      "file_extension": this.type == 'document' ? `.${extension[1]}` : '',
       "flag": this.type == '' ? 'text' : this.type
     }
     this._api.sendMessage(data).subscribe(res => {
