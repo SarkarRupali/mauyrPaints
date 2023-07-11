@@ -1,0 +1,38 @@
+
+ion-header{
+  &::after{
+    display: none;
+  }
+  ion-toolbar{
+    --background:var(--ion-color-alizarin-contrast);
+
+    ion-title{
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--ion-color-light-contrast);
+    }
+    ion-button{
+      &.notification {
+          height: 48px;
+          width: 48px;
+          margin: 0;
+          --border-radius: 50%;
+      }
+    }
+  }
+}
+ion-content {
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --background: #ffffff;
+
+  h3 {
+    font-size: 20px;
+    font-weight: 700;
+  }
+  p {
+    font-size: 13px;
+  }
+}

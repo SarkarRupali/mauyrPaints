@@ -1,0 +1,180 @@
+<ion-header>
+  <ion-toolbar>
+     <ion-buttons slot="start">
+      <ion-menu-button>
+        <ion-icon
+          src="../../assets/images/menu.svg"
+        ></ion-icon>
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title>Home</ion-title>
+    <ion-buttons slot="end" *ngIf="userData.type==2">
+      <ion-button class="notification" routerLink="/notification">
+        <ng-container *ngIf="notifiction.length>0">
+          <ion-icon
+          src="../../assets/images/notification.svg"
+        ></ion-icon>
+        </ng-container>
+        
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="home">
+
+    <div class="home_slider">
+      <ion-slides pager="true" [options]="homeSlide">
+        <ion-slide *ngFor = "let banner of bannerList">
+          <div class="slider_content" style="background: url({{baseImageUrl+banner.image}}) center no-repeat;">
+            <h1>{{banner.title}}</h1>
+            <p>{{banner.short_desc}}</p>
+          </div>
+        </ion-slide>
+        <!-- <ion-slide>
+          <div class="slider_content" style="background: url(../../assets/images/rm405-a02d-mockup_1.jpg) center no-repeat;">
+            <h1>Mayur Synthetic Enamel</h1>
+            <p>is a Economical used in Home & Factory for protective coverage against rusting.</p>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="slider_content" style="background: url(../../assets/images/home-slider-bg.jpg) center no-repeat;">
+            <h1>Mayur Synthetic Enamel</h1>
+            <p>is a Economical used in Home & Factory for protective coverage against rusting.</p>
+          </div>
+        </ion-slide> -->
+      </ion-slides>
+    </div>
+
+    <h3 class="page_title" *ngIf="userData.type==1">Your Rewards Points</h3>
+
+    <div class="reward_container" *ngIf="userData.type==1">
+      <ng-container >
+        <ion-img src="../../assets/images/coins.png"></ion-img>
+        <ng-container  *ngIf="userPoints!=0;else rewardBlock">
+          <h2>{{userPoints}}</h2>
+        </ng-container>
+        <ng-template #rewardBlock>
+          <h3 class="reward_title">You have no points in your wallet</h3>
+        </ng-template>
+        
+        <ion-button (click)="goToGiftPage()" *ngIf="userPoints!=0">
+          <ion-icon src="../../assets/images/gift.svg"></ion-icon>
+          Redeem NOW
+        </ion-button>
+      </ng-container>
+     
+      
+    </div>
+
+    <h3 class="page_title">Our Products</h3>
+
+    <div class="category_wrapper">
+      <ul>
+        <ng-container *ngFor="let category of categoryList">
+          <li routerLink="/product/{{category.id}}">
+            <img src="{{baseImageUrl+category.image}}" alt="" srcset="">
+            <p>{{category.name}}</p>
+          </li>
+        </ng-container>
+        <!-- <li routerLink="/product" style="background-image: url(../../assets/images/home-product-2.jpg);">
+          <p>Water based Product</p>
+        </li>
+        <li routerLink="/product" style="background-image: url(../../assets/images/home-product-3.jpg);">
+          <p>Power Products</p>
+        </li>
+        <li routerLink="/product" style="background-image: url(../../assets/images/home-product-4.jpg);">
+          <p>universal stainer</p>
+        </li>
+        <li routerLink="/product" style="background-image: url(../../assets/images/home-product-5.jpg);">
+          <p>thinner</p>
+        </li> -->
+      </ul>
+    </div>
+
+    <ng-container *ngIf="userData.type==1">
+      <div class="qr_scan">
+        <ion-img src="../../assets/images/qr-code.png"></ion-img>
+        <p>Scan the Qr code &  earn reward</p>
+        <button (click)="scanQRCode()">
+          <ion-img src="../../assets/images/scanner.svg"></ion-img>
+          Scan NOw
+        </button>
+      </div>
+
+      <h3 class="page_title">Redeem your Rewards Points  <a routerLink="/gift" style="float: right;">All Gifts</a></h3>
+
+      <div class="home_redeem_product">
+        <!-- <h3>Redeem your Rewards Points <span routerLink="/product">View All</span></h3> -->
+        <ion-slides pager="false" [options]="slideOpts">
+          <ion-slide routerLink="/giftdetails/{{gift.id}}" *ngFor="let gift of top5GiftList">
+            <div class="home_redeem_product_item">
+              <div class="home_redeem_product_item_img">
+                <img src="{{baseImageUrl+gift.image}}" alt="">
+              </div>
+              <div class="home_redeem_product_item_text">
+                <h4>{{gift.name}}</h4>
+                <span>{{gift.points}} Points  <img src="../../assets/images/arrow-right.png" alt=""></span>
+              </div>
+            </div>
+          </ion-slide>
+          
+          <!-- <ion-slide routerLink="/productdetails">
+            <div class="home_redeem_product_item">
+              <div class="home_redeem_product_item_img">
+                <img src="../../assets/images/7fdd3bda2076f7bdb2ed96e7ec01810a 1.png" alt="">
+              </div>
+              <div class="home_redeem_product_item_text">
+                <h4>KGA Sandwitch maker</h4>
+                <span>1500 Points  <img src="../../assets/images/arrow-right.png" alt=""></span>
+              </div>
+            </div>
+          </ion-slide> -->
+        </ion-slides>
+      </div>
+
+      <h3 class="page_title" *ngIf="lastHistory.length>0">Redeem History <span style="float: right;" routerLink="/history">All</span></h3>
+     
+      <div class="home_redeem_history" *ngFor="let history of lastHistory">
+        <ion-item lines="none" class="home_redeem_history_item home_redeem_history_credit" *ngIf="history.status=='increment'">
+          <ion-avatar class="home_redeem_history_item_icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 5V19" stroke="#65B869" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M5 12H19" stroke="#65B869" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </ion-avatar>
+          <ion-label class="home_redeem_history_item_middle">
+            <!-- <h4>12th January, 2022</h4> -->
+            <h4>{{history.date}}</h4>
+            <p>{{history.title}}</p>
+            <p>{{history.desc}}</p>
+          </ion-label>
+          <ion-button>
+            + {{history.amount}}
+          </ion-button>
+        </ion-item>
+        <ion-item lines="none" class="home_redeem_history_item home_redeem_history_debit" *ngIf="history.status=='decrement'">
+          <ion-avatar class="home_redeem_history_item_icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 12H19" stroke="#EA1C2C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </ion-avatar>
+          <ion-label class="home_redeem_history_item_middle">
+            <h4>{{history.date}}</h4>
+            <p>{{history.title}}</p>
+            <p>{{history.desc}}</p>
+          </ion-label>
+          <ion-button>
+            - {{history.amount}}
+          </ion-button>
+        </ion-item>
+      </div>
+    </ng-container>
+  </div>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" routerLink="/chat" *ngIf="userData.type==2">
+    <ion-fab-button>
+      <ion-img src="../../assets/images/chat.svg"></ion-img>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

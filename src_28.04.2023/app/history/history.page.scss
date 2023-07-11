@@ -1,0 +1,115 @@
+
+ion-header{
+  &::after{
+    display: none;
+  }
+  ion-toolbar{
+    --background:var(--ion-color-alizarin-contrast);
+
+    ion-title{
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--ion-color-light-contrast);
+    }
+    ion-button{
+      &.notification {
+          height: 48px;
+          width: 48px;
+          margin: 0;
+          --border-radius: 50%;
+      }
+    }
+  }
+}
+
+ion-content{
+  --background:#F4F8F9;
+}
+
+.history{
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 16px;
+  padding-bottom: 1px;
+  h3{
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 20px;
+    color: #565656;
+    margin: 0 0 16px;
+  }
+  ion-list{
+    background: transparent;
+    padding: 0;
+  }
+  &_item{
+    margin-bottom: 16px;
+    background: var(--ion-color-alizarin-contrast);
+    padding: 8px 15px 8px 16px;
+    border-radius: 4px;
+    --padding-start:0;
+    --inner-padding-end:0;
+    --min-height:44px;
+
+    &_icon{
+      width: 40px;
+      height: 40px;
+      background: #F4F8F9;
+      border-radius: 50%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-content: center;
+      align-self: center;
+      margin: 0;
+    }
+    &_middle{
+      padding-left: 12px;
+      align-self: center;
+      margin: 0;
+      h4{
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 20px;
+        color: var(--ion-color-light-contrast);
+        margin: 0;
+      }
+      p{
+        font-weight: 500;
+        font-size: 11px;
+        line-height: 16px;
+        color: #989898;
+        margin: 0;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+    ion-button{
+      --background:transparent;
+      --box-shadow:none;
+      --padding-start:0;
+      --padding-end:0;
+      margin: 0;
+      font-weight: 700;
+      font-size: 13px;
+      line-height: 20px;
+      color: #5965B8;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding-left: 10px;
+      align-self: flex-start;
+      img{
+        width: 16px;
+        margin-left: 3px;
+        display: block;
+      }
+    }
+  }
+  &_debit{
+    ion-button{
+      color: var(--ion-color-alizarin);
+    }
+  }
+}

@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+     <ion-buttons slot="start">
+      <ion-menu-button>
+        <ion-icon
+          src="../../assets/images/menu.svg"
+        ></ion-icon>
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title>Gifts</ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="product">
+    <ion-row>
+      <ion-col size="6" *ngFor="let gift of giftList">
+        <div class="product_item" routerLink="/giftdetails/{{gift.id}}">
+          <div class="product_item_img">
+            <img src="{{baseImageUrl + gift.image}}" alt="">
+          </div>
+          <div class="product_item_text">
+            <h4>{{gift.name}}</h4>
+            <span>{{gift.points}} Points  <img src="../../assets/images/arrow-right.png" alt=""></span>
+          </div>
+        </div>
+      </ion-col>
+     
+      <!-- <ion-col size="6">
+        <div class="product_item" routerLink="/giftdetails">
+          <div class="product_item_img">
+            <img src="../../assets/images/in-galaxy-a04s-a047-sm-a047fzcgins-thumb-533977924 1.png" alt="">
+          </div>
+          <div class="product_item_text">
+            <h4>Silicone Sleeve | Stylish Water Bottle</h4>
+            <span>80 Points  <img src="../../assets/images/arrow-right.png" alt=""></span>
+          </div>
+        </div>
+      </ion-col> -->
+    </ion-row>
+  </div>
+</ion-content>

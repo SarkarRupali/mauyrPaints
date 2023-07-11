@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+     <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Product</ion-title>
+    <!-- <ion-buttons slot="end">
+      <ion-button class="notification">
+        <ion-icon
+          src="../../assets/images/notification.svg"
+        ></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="product_details" *ngIf="giftDetials">
+    <div class="product_details_img_wrap">
+      <ion-img src="{{baseImageUrl+giftDetials.image}}"></ion-img>
+    </div>
+    <h1 class="product_title">{{giftDetials.name}}</h1>
+    <h5 [innerHTML]="giftDetials.short_desc" *ngIf="giftDetials.desc!=null"></h5>
+    <div class="product_content">
+      <p [innerHTML]="giftDetials.desc" *ngIf="giftDetials.desc!=null"></p>
+      <div class="quantity_btn">
+        <strong>Quantity:</strong> 
+        <span class="quantityBtn plusBtn"><ion-icon name="remove-outline" (click)="removeQuantity()"></ion-icon></span>
+        <div class="quantity_box">{{quantity}}</div>
+       
+        <span class="quantityBtn plusBtn"> <ion-icon name="add-outline" (click)="addquantity()"></ion-icon></span>
+      </div>
+      <p class="points"><strong>Points:</strong> {{giftDetials.points}}</p>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer collapse="fade" class="ion-no-border">
+  <ion-button expand="block" (click)="goToAddress()"> Get it Now</ion-button>
+</ion-footer>

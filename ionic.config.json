@@ -1,0 +1,7 @@
+{
+  "name": "mauyrpaints",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit Address</ion-title>
+    <ion-buttons slot="end">
+      <ion-button></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="addressForm" (ngSubmit)="addressEdit()">
+    
+    <ion-item lines="none">
+      <ion-img src="../../assets/images/Frame3.svg"></ion-img>
+      <ion-input placeholder="Address" type="text" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f['address'].errors }"></ion-input>
+    </ion-item>
+    <div *ngIf="submitted && f['address'].errors" class="invalid-feedback">  
+      <span class="danger" *ngIf="f['address'].errors['required']">Address is required.</span>  
+      <span class="danger" *ngIf="f['address'].errors['cannotContainSpace']">Please enter valid address.</span>  
+    </div>
+
+    <ion-item lines="none">
+      <ion-img src="../../assets/images/Frame5.svg"></ion-img>
+      <ion-input placeholder="State" type="text" formControlName="state" [ngClass]="{ 'is-invalid': submitted && f['state'].errors }"></ion-input>
+    </ion-item>
+    <div *ngIf="submitted && f['state'].errors" class="invalid-feedback">  
+      <span class="danger" *ngIf="f['state'].errors['required']">State is required.</span>  
+      <span class="danger" *ngIf="f['state'].errors['cannotContainSpace']">Please enter valid state.</span>  
+    </div>
+
+    <ion-item lines="none">
+      <ion-img src="../../assets/images/Frame5.svg"></ion-img>
+      <ion-input placeholder="City" type="text" formControlName="city" [ngClass]="{ 'is-invalid': submitted && f['city'].errors }"></ion-input>
+    </ion-item>
+    <div *ngIf="submitted && f['city'].errors" class="invalid-feedback">  
+      <span class="danger" *ngIf="f['city'].errors['required']">City is required.</span>  
+      <span class="danger" *ngIf="f['city'].errors['cannotContainSpace']">Please enter valid city.</span>  
+    </div>
+    
+    <ion-item lines="none">
+      <ion-img src="../../assets/images/Frame6.svg"></ion-img>
+      <ion-input placeholder="Pin Code" type="text" formControlName="pin" [ngClass]="{ 'is-invalid': submitted && f['pin'].errors }"></ion-input>
+    </ion-item>
+    <div *ngIf="submitted && f['pin'].errors" class="invalid-feedback">  
+      <span class="danger" *ngIf="f['pin'].errors['required']">Pin Code is required.</span>  
+      <span class="danger" *ngIf="f['pin'].errors['pattern']">Please enter valid pin code.</span>  
+    </div>
+    <ion-button expand="block" type="submit">Submit</ion-button>
+    <ion-button expand="block" type="button" (click)="cancel()">Cancel</ion-button>
+  </form>
+</ion-content>

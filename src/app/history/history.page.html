@@ -1,0 +1,183 @@
+<ion-header>
+  <ion-toolbar>
+     <ion-buttons slot="start">
+      <!-- <ion-menu-button>
+        <ion-icon
+          src="../../assets/images/menu.svg"
+        ></ion-icon>
+      </ion-menu-button> -->
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>History</ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="history">
+    <ion-list *ngFor="let transaction of transactionList">
+     
+      <ion-item lines="none" class="history_item history_credit" *ngIf="transaction.status=='increment'">
+        <ion-avatar class="history_item_icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 5V19" stroke="#5965B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M5 12H19" stroke="#5965B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </ion-avatar>
+        <ion-label class="history_item_middle">
+          <h4>{{transaction.date}}</h4>
+          <p>{{transaction.title}}</p>
+          <p>{{transaction.desc}}</p>
+        </ion-label>
+        <ion-button>
+          + {{transaction.amount}}
+          <img src="../../assets/images/smallcoin.png" alt="">
+        </ion-button>
+      </ion-item>
+
+      <ion-item lines="none" class="history_item history_debit" *ngIf="transaction.status=='decrement'" (click)="setOpen(true,transaction)">
+        <ion-avatar class="history_item_icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 12H19" stroke="#EA1C2C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </ion-avatar>
+        <ion-label class="history_item_middle">
+          <h4>{{transaction.date}}</h4>
+          <p>{{transaction.title}}</p>
+          <p>{{transaction.desc}}</p>
+        </ion-label>
+        <ion-button>
+          - {{transaction.amount}}
+          <img src="../../assets/images/smallcoin.png" alt="">
+        </ion-button>
+      </ion-item>
+      <!-- <ion-item lines="none" class="history_item history_debit">
+        <ion-avatar class="history_item_icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 12H19" stroke="#EA1C2C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </ion-avatar>
+        <ion-label class="history_item_middle">
+          <h4>12th January, 2022</h4>
+          <p>You purchase Sony SLTA58KMD</p>
+        </ion-label>
+        <ion-button>
+          - 10,000
+          <img src="../../assets/images/smallcoin.png" alt="">
+        </ion-button>
+      </ion-item> -->
+    </ion-list>
+    <!-- <ion-list>
+      <h3>10th December, 2022</h3>
+      <ion-item lines="none" class="history_item history_credit">
+        <ion-avatar class="history_item_icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 5V19" stroke="#5965B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M5 12H19" stroke="#5965B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </ion-avatar>
+        <ion-label class="history_item_middle">
+          <h4>10th January, 2022</h4>
+          <p>Total 10,000 points earn</p>
+        </ion-label>
+        <ion-button>
+          + 12,000
+          <img src="../../assets/images/smallcoin.png" alt="">
+        </ion-button>
+      </ion-item>
+      <ion-item lines="none" class="history_item history_debit">
+        <ion-avatar class="history_item_icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 12H19" stroke="#EA1C2C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </ion-avatar>
+        <ion-label class="history_item_middle">
+          <h4>10th January, 2022</h4>
+          <p>You purchase Sony SLTA58KMD</p>
+        </ion-label>
+        <ion-button>
+          - 10,000
+          <img src="../../assets/images/smallcoin.png" alt="">
+        </ion-button>
+      </ion-item>
+      <ion-item lines="none" class="history_item history_debit">
+        <ion-avatar class="history_item_icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 12H19" stroke="#EA1C2C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </ion-avatar>
+        <ion-label class="history_item_middle">
+          <h4>10th January, 2022</h4>
+          <p>You purchase Sony SLTA58KMD</p>
+        </ion-label>
+        <ion-button>
+          - 10,000
+          <img src="../../assets/images/smallcoin.png" alt="">
+        </ion-button>
+      </ion-item>
+      <ion-item lines="none" class="history_item history_credit">
+        <ion-avatar class="history_item_icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 5V19" stroke="#5965B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M5 12H19" stroke="#5965B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </ion-avatar>
+        <ion-label class="history_item_middle">
+          <h4>10th January, 2022</h4>
+          <p>Total 10,000 points earn</p>
+        </ion-label>
+        <ion-button>
+          + 12,000
+          <img src="../../assets/images/smallcoin.png" alt="">
+        </ion-button>
+      </ion-item>
+    </ion-list> -->
+  </div>
+  <!-- <ion-modal [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Details</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="setOpen(false,'')"><ion-icon name="close-outline"></ion-icon></ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ng-container *ngIf="orderType == 'cash withdrawal';else cashBlock">
+          <div class="product_details">
+            <h1 class="product_title">
+              Your Request amount is Rs.{{orderDetails.final_amount}}
+            </h1>
+            <ion-badge color="primary" *ngIf="orderDetails.paid_status==null || orderDetails.paid_status==0">Unpaid</ion-badge>
+            <ion-badge color="success" *ngIf="orderDetails.paid_status==1">Paid</ion-badge>
+          </div>
+        </ng-container>
+        <ng-template #cashBlock>
+          <div class="product_details">
+            <div class="product_details_img_wrap">
+              <ion-img src="{{baseURL+orderDetails?.product_image}}"></ion-img>
+            </div>
+            <h1 class="product_title">
+              {{orderDetails?.product_name}}
+            </h1>
+            <ion-badge color="primary" *ngIf="orderDetails.status==1">New</ion-badge>
+            <ion-badge color="success" *ngIf="orderDetails.status==2">Confirmed</ion-badge>
+            <ion-badge color="secondary" *ngIf="orderDetails.status==3">Shipped</ion-badge>
+            <ion-badge color="success" *ngIf="orderDetails.status==4">Delivered</ion-badge>
+            <ion-badge color="danger" *ngIf="orderDetails.status==5">Cancel</ion-badge>
+            <div class="product_content">
+              <p><strong>Quantity:</strong> <span>{{orderDetails?.qty}}</span></p>
+              <p><strong>Total Points:</strong> <span>{{orderDetails?.final_amount}}</span></p>
+              <p><strong>Address:</strong> <span>{{orderDetails?.shipping_address}}</span></p>
+              <p><strong>City:</strong> <span>{{orderDetails?.shipping_city}}</span></p>
+              <p><strong>State:</strong> <span>{{orderDetails?.shipping_state}}</span></p>
+              <p><strong>Pin:</strong><span>{{orderDetails?.shipping_pin}}</span></p>
+            </div>
+          </div>
+        </ng-template>
+      </ion-content>
+    </ng-template>
+  </ion-modal> -->
+</ion-content>

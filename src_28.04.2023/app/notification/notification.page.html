@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+     <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Notification</ion-title>
+    <ion-buttons slot="end" *ngIf="userData?.type==2">
+      <ion-button class="notification" routerLink="/notification">
+        <ion-icon
+          src="../../assets/images/notification.svg"
+        ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item lines="none" *ngFor="let notification of notificationList" class="active">
+      <!-- New Notification Section -->
+      <ion-label *ngIf="notification.read_flag==0 else oldNotification" (click)="markingNotificationAsRead(notification.id)" class="newNotification" routerLink="/chat">
+        <h6>{{notification.title}}</h6>
+        <p>{{notification.created_at| date:'dd-MM-yyyy'}}</p>
+      </ion-label>
+      <!-- old Notifiaction Section -->
+      <ng-template #oldNotification >
+        <ion-label class="notificationViewd " routerLink="/chat">
+          <h6>{{notification.title}} </h6>
+          <p>{{notification.created_at| date:'dd-MM-yyyy'}}</p>
+        </ion-label>
+      </ng-template>
+    </ion-item>
+    <p *ngIf="notificationList.length==0" style="color: aliceblue;">There is no new notification</p>
+  </ion-list>
+</ion-content>

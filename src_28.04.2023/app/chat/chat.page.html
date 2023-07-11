@@ -1,0 +1,96 @@
+<ion-header>
+  <ion-toolbar>
+     <ion-buttons slot="start">
+      <ion-menu-button>
+        <ion-icon
+          src="../../assets/images/menu.svg"
+        ></ion-icon>
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title>Message</ion-title>
+   
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher> -->
+  
+  <ion-list *ngFor="let list of messageList">
+    <ion-item class="user-end" *ngIf="list.receiver_id==0">
+      <div class="chat_content">
+        <ion-label>
+          <ng-container *ngIf="list.flag=='text';else imageBlock">
+            <p>{{list.message}}</p>
+          </ng-container>
+          <ng-template #imageBlock>
+            <ng-container *ngIf="list.file_extension=='.jpg'||list.file_extension=='.jpeg'||list.file_extension=='.png'||list.file_extension=='.svg'||list.file_extension=='.gif'||list.file_extension=='.bmp';else docBlock">
+              <ion-button (click)="download(list.message)" class="download_chatimg"><ion-icon src="../../assets/images/download.svg"></ion-icon></ion-button>
+              <img src="{{baseImageUrl + list.message}}"/>
+            </ng-container>
+
+            <ng-template #docBlock>
+              <div class="chat_document">
+                <ion-button (click)="download(list.message)" class="download_chatimg"><ion-icon src="../../assets/images/download.svg"></ion-icon></ion-button>
+                <ion-icon src="../../assets/images/docfile.svg"></ion-icon>
+                <span>{{list.filename}}</span>
+              </div>
+            </ng-template>
+            
+          </ng-template>
+        </ion-label>
+        <ion-note>{{list.daysago}}</ion-note>
+      </div>
+    </ion-item>
+
+    <ion-item class="client-end" *ngIf="list.sender_id==0">
+      <div class="chat_content">
+        <ion-label>
+          <ng-container *ngIf="list.flag=='text';else imageBlock">
+            <p>{{list.message}}</p>
+          </ng-container>
+          <ng-template #imageBlock>
+            <ng-container *ngIf="list.file_extension=='.jpg'||list.file_extension=='.jpeg'||list.file_extension=='.png'||list.file_extension=='.svg'||list.file_extension=='.gif'||list.file_extension=='.bmp';else docBlock">
+              <ion-button (click)="download(list.message)" class="download_chatimg"><ion-icon src="../../assets/images/download.svg"></ion-icon></ion-button>
+              <img src="{{baseImageUrl + list.message}}"/>
+            </ng-container>
+
+            <ng-template #docBlock>
+              <div class="chat_document">
+                <ion-button (click)="download(list.message)" class="download_chatimg"><ion-icon src="../../assets/images/download.svg"></ion-icon></ion-button>
+                <ion-icon src="../../assets/images/docfile.svg"></ion-icon>
+                <span>{{list.filename}}</span>
+              </div>
+            </ng-template>            
+          </ng-template>
+        </ion-label>
+        <ion-note>{{list.daysago}}</ion-note>
+      </div>
+    </ion-item>
+    <!-- <ion-item class="user-end">
+      <div class="chat_content">
+        <ion-label>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod...</p>
+        </ion-label>
+        <ion-note>3min ago</ion-note>
+      </div>
+    </ion-item> -->
+  </ion-list>
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-item lines="none">
+      <ion-textarea [autoGrow]="true" rows="1" placeholder="Enter message here" [(ngModel)]="message"></ion-textarea>
+      <ion-icon slot="end" name="document-attach-outline" (click)="uploadDoc()"></ion-icon>
+    </ion-item>
+    <ion-button slot="end" expand="block" color="milegreen" (click)="sendMessage()">
+      <ion-img src="../../assets/images/send.svg"></ion-img>
+    </ion-button>
+    <!-- <ion-button slot="end" expand="block" color="milegreen" (click)="uploadDoc()">
+      doc
+    </ion-button> -->
+  </ion-toolbar>
+</ion-footer>

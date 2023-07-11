@@ -1,0 +1,72 @@
+<ion-app>
+  <ion-split-pane contentId="main-content">
+    <ion-menu contentId="main-content" type="overlay" (ionWillOpen)="openMenu()" [swipeGesture]="false">
+      <ion-content>
+          <div class="slideprofile">
+              <div class="slideprofile_logo">
+                <img src="../assets/images/logo.png" alt="" srcset="">
+                <!-- <img src="https://ui-avatars.com/api/?color=ED2E36&background=F4F8F9&bold=true&name=Joydeep+Paul" alt=""> -->
+              </div>
+              <div class="slideprofile_text">
+                <h3 *ngIf="userDetails.name">Hi, {{userDetails.name}}!</h3>
+                <p *ngIf="userDetails.email">{{userDetails.email}}</p>
+              </div>
+          </div>
+          <ion-menu-toggle auto-hide="false">
+            <div class="menus">
+              <ion-item detail="true" lines="none" routerLink="/home" routerLinkActive="selected" routerDirection="forward">
+                <ion-avatar>
+                  <img src="../assets/images/home.png" alt="">
+                </ion-avatar>
+                <ion-label>Home</ion-label>
+              </ion-item>
+              <ion-item detail="true" lines="none" routerLink="/about" routerLinkActive="selected" routerDirection="forward">
+                <ion-avatar>
+                  <img src="../assets/images/bucket-drop.png" alt="">
+                </ion-avatar>
+                <ion-label>About Us</ion-label>
+              </ion-item>
+              <ion-item detail="true" lines="none" routerLink="/profile" routerDirection="forward"  *ngIf="userDetails.type">
+                <ion-avatar>
+                  <img src="../assets/images/people.png" alt="">
+                </ion-avatar>
+                <ion-label>My Profile</ion-label>
+              </ion-item>
+              <ion-item detail="true" lines="none" routerLink="/orderlist" routerDirection="forward" *ngIf="userDetails.type">
+                <ion-avatar>
+                  <img src="../assets/images/checklist.png" alt="">
+                </ion-avatar>
+                <ion-label>My Order</ion-label>
+              </ion-item>
+              <ion-item detail="true" lines="none" routerLink="/reward" *ngIf="userDetails.type==1">
+              <!-- <ion-item detail="true" lines="none" routerLink="/gift" *ngIf="userDetails.type==1" routerDirection="forward"> -->
+                <ion-avatar>
+                  <img src="../assets/images/medal.png" alt="">
+                </ion-avatar>
+                <ion-label>Reward</ion-label>
+              </ion-item>
+              <ion-item detail="true" lines="none" routerLink="/complain" routerDirection="forward" *ngIf="userDetails.type">
+                <ion-avatar>
+                  <img src="../assets/images/customer-service.png" alt="">
+                </ion-avatar>
+                <ion-label>Contact Support?</ion-label>
+              </ion-item> 
+            </div>
+          </ion-menu-toggle>
+      </ion-content>
+      <ion-footer  *ngIf="userDetails.type">
+        <ion-toolbar class="footermenus">
+          <ion-menu-toggle auto-hide="false">
+          <ion-item detail="true" lines="none" (click)="logOut()">
+            <ion-avatar>
+              <img src="../assets/images/switch.png" alt="">
+            </ion-avatar>
+            <ion-label>Log Out</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        </ion-toolbar>
+      </ion-footer>
+    </ion-menu>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

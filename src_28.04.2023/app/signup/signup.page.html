@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Sign Up</ion-title>
+    <ion-buttons slot="end">
+      <ion-button></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <p>Create an account so you can redeem your reward point and get products. </p>
+  <form [formGroup]="customerRegisterForm" (ngSubmit)="signUpCustomer()">
+    <!-- <ion-item lines="none">
+      <ion-input placeholder="Retailer ID" type="text"></ion-input>
+    </ion-item> -->
+    <ion-item lines="none">
+      <ion-img src="../../assets/images/Frame.svg"></ion-img>
+      <ion-input placeholder="Full Name" type="text" formControlName="name" [ngClass]="{ 'is-invalid': submitted && f['name'].errors }"></ion-input>
+    </ion-item>
+    <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">  
+      <span class="danger" *ngIf="f['name'].errors['required']">Full Name is required.</span>  
+      <span class="danger" *ngIf="f['name'].errors['pattern']">Please enter valid full name.</span>  
+    </div>
+
+    <ion-item lines="none">
+      <ion-img src="../../assets/images/envelop.svg"></ion-img>
+      <ion-input placeholder="Email" type="email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"></ion-input>
+    </ion-item>
+    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">  
+      <span class="danger" *ngIf="f['email'].errors['pattern']">Please enter valid email.</span>  
+    </div>
+
+    <ion-item lines="none">
+      <ion-img src="../../assets/images/phone.svg"></ion-img>
+      <ion-input formControlName="mobile" type="tel" maxlength="10" placeholder="Phone Number" [ngClass]="{ 'is-invalid': submitted && f['mobile'].errors }"></ion-input>
+    </ion-item>
+    <div *ngIf="submitted && f['mobile'].errors" class="invalid-feedback">  
+      <span class="danger" *ngIf="f['mobile'].errors['required']">Phone number is required.</span>  
+      <span class="danger" *ngIf="f['mobile'].errors['pattern']">Please enter valid phone number.</span>  
+    </div>
+
+    <ion-item lines="none">
+      <ion-img src="../../assets/images/Frame2.svg"></ion-img>
+      <ion-input placeholder="Whatsapp No." type="tel" maxlength="10" formControlName="whatsapp_no" [ngClass]="{ 'is-invalid': submitted && f['whatsapp_no'].errors }"></ion-input>
+    </ion-item>
+    <div *ngIf="submitted && f['whatsapp_no'].errors" class="invalid-feedback">  
+      <span class="danger" *ngIf="f['whatsapp_no'].errors['required']">Whatsapp number is required.</span>  
+      <span class="danger" *ngIf="f['whatsapp_no'].errors['pattern']">Please enter valid whatsapp number.</span>  
+    </div>
+
+    <ion-item lines="none">
+      <ion-img src="../../assets/images/Frame3.svg"></ion-img>
+      <ion-input placeholder="Address" type="text" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f['address'].errors }"></ion-input>
+    </ion-item>
+    <div *ngIf="submitted && f['address'].errors" class="invalid-feedback">  
+      <span class="danger" *ngIf="f['address'].errors['required']">Address is required.</span>  
+      <span class="danger" *ngIf="f['address'].errors['cannotContainSpace']">Please enter valid address.</span>  
+    </div>
+
+    <ion-item lines="none">
+      <ion-img src="../../assets/images/lock-closed-outline.svg"></ion-img>
+      <ion-input formControlName="password" [type]="passwordType" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"></ion-input>
+      <ion-button slot="end" fill="clear" (click)="showPassword()" class="seeClient">
+        <ion-icon *ngIf="showPsw==true" name="eye-outline" color="black" class="iconEye"></ion-icon>
+        <ion-icon *ngIf="showPsw==false" name="eye-off-outline" color="black" class="iconEye"></ion-icon>
+      </ion-button>
+    </ion-item>
+    <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">  
+      <span class="danger" *ngIf="f['password'].errors['required']">Please enter your password.</span>  
+      <span class="danger" *ngIf="f['password'].errors['minlength']">Minimum password length is 6.</span>  
+    </div> 
+
+    <ion-item lines="none">
+      <ion-img src="../../assets/images/lock-closed-outline.svg"></ion-img>
+     <ion-input formControlName="confirm_password" [type]="cpasswordType" placeholder="Confirm Password" [ngClass]="{ 'is-invalid': submitted && f['confirm_password'].errors }"></ion-input>
+      <ion-button slot="end" fill="clear" (click)="showConfirmPassword()" class="seeClient">
+        <ion-icon *ngIf="showConfirmPsw==true" name="eye-outline" color="black" class="iconEye"></ion-icon>
+        <ion-icon *ngIf="showConfirmPsw==false" name="eye-off-outline" color="black" class="iconEye"></ion-icon>
+      </ion-button>
+    </ion-item>
+    <div *ngIf="submitted && f['confirm_password'].errors" class="invalid-feedback">  
+      <span class="danger" *ngIf="f['confirm_password'].errors['required']">Please enter your confirm password.</span>  
+      <span class="danger" *ngIf="f['confirm_password'].errors['confirmedValidator']">Password and Confirm Password does not match.</span>  
+    </div> 
+    
+    <ion-button expand="block" type="submit">Sign Up</ion-button>
+  </form>
+</ion-content>

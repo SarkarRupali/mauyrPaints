@@ -1,0 +1,68 @@
+Camera :
+	ionic cordova plugin add cordova-plugin-camera
+	npm install @ionic-native/camera
+File transfer :
+	cordova plugin add https://github.com/apache/cordova-plugin-file-transfer.git
+	npm install @ionic-native/file-transfer
+
+File : 
+	ionic cordova plugin add cordova-plugin-file
+	npm i @ionic-native/file
+	
+To solve camera plugin issue : 
+	npm install @ionic-native/core
+	
+File chooser: 
+	ionic cordova plugin add cordova-plugin-filechooser
+	npm install @ionic-native/file-chooser	
+	
+File Path :
+	ionic cordova plugin add cordova-plugin-filepath
+	npm i @ionic-native/file-path
+		
+Moment
+	npm i moment
+
+Scnner : 
+	ionic cordova plugin add phonegap-plugin-barcodescanner
+	npm install @ionic-native/barcode-scanner
+		
+	To solve barcode issue	
+	in plugin/phonegapbarcode/src/android/.gradle plugin
+		dependencies {
+		    implementation(name:'barcodescanner-release-2.1.5', ext:'aar')
+		}
+	
+	https://we.tl/t-lzFDTZmXnH
+	Customer Login :
+	ph : 7778888881
+	pass : Pa$$w0rd!
+	
+	SellsPerson Login :
+	ph : 9804885561
+	pass : 12345678
+	
+	Painter Login :
+	ph : 9800864081
+	pass : 12345678
+	
+
+build:
+	ionic cordova build android --prod --release -- -- --packageType=bundle
+	keytool -genkey -v -keystore mauyrpaints.keystore -alias mauyrpaints -keyalg RSA -keysize 2048 -validity 10000    pass : 123456
+	jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore mauyrpaints.keystore app-release.aab mauyrpaints
+	zipalign -v 4 app-release.aab mauyrpaints.aab
+
+
+
+
+google play login
+username : mayurpaints2023@gmail.com
+password : M@yur#2023	
+	
+	
+	
+	
+	file:///storage/emulated/0/Download/https://backen…roueducation.com/assets/upload/pdf/1683013051.pdf
+	
+

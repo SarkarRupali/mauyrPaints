@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Order</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="profile_top_img">
+  
+    <!-- <ion-button (click)="orderImage()">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0_67_508)">
+        <path d="M11.3333 2.00001C11.5083 1.82491 11.7162 1.68602 11.945 1.59126C12.1738 1.4965 12.419 1.44772 12.6666 1.44772C12.9142 1.44772 13.1594 1.4965 13.3882 1.59126C13.617 1.68602 13.8248 1.82491 13.9999 2.00001C14.175 2.1751 14.3139 2.38297 14.4087 2.61175C14.5034 2.84052 14.5522 3.08572 14.5522 3.33334C14.5522 3.58096 14.5034 3.82616 14.4087 4.05494C14.3139 4.28371 14.175 4.49158 13.9999 4.66668L4.99992 13.6667L1.33325 14.6667L2.33325 11L11.3333 2.00001Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <defs>
+          <clipPath id="clip0_67_508">
+            <rect width="16" height="16" fill="white"/>
+          </clipPath>
+        </defs>
+      </svg>
+    </ion-button> -->
+
+    <div class="upload_order" (click)="orderImage()">
+      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0" viewBox="0 0 40 40" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><g fill="#000" fill-rule="evenodd" clip-rule="evenodd"><path d="m17.482 7.197-1.98 3.093-.018.03a2.786 2.786 0 0 1-2.3 1.23H11c-2.616 0-4.75 2.13-4.75 4.717V28.2c0 2.586 2.134 4.717 4.75 4.717h18.017c2.616 0 4.75-2.13 4.75-4.717V16.267c0-2.586-2.134-4.717-4.75-4.717h-2.2c-.892 0-1.756-.42-2.284-1.197L22.393 7.2a.29.29 0 0 0-.226-.117H17.7a.246.246 0 0 0-.218.114zm-2.095-1.364a2.745 2.745 0 0 1 2.313-1.25h4.467a2.79 2.79 0 0 1 2.27 1.178l.014.02 2.15 3.166c.038.057.108.103.216.103h2.2c3.983 0 7.25 3.236 7.25 7.217V28.2c0 3.98-3.267 7.217-7.25 7.217H11c-3.984 0-7.25-3.237-7.25-7.217V16.267c0-3.98 3.266-7.217 7.25-7.217h2.183c.074 0 .161-.036.227-.127z" fill="#000000" data-original="#000000" class=""></path><path d="M20 15.25a6.633 6.633 0 1 0 0 13.267 6.633 6.633 0 0 0 0-13.267zm-9.133 6.633a9.133 9.133 0 1 1 18.266 0 9.133 9.133 0 0 1-18.266 0z" fill="#000000" data-original="#000000" class=""></path><path d="M20 17.617c.69 0 1.25.56 1.25 1.25v6.016a1.25 1.25 0 1 1-2.5 0v-6.016c0-.69.56-1.25 1.25-1.25z" fill="#000000" data-original="#000000" class=""></path><path d="M24.25 21.863a1.25 1.25 0 0 1-1.246 1.254l-6 .016a1.25 1.25 0 1 1-.008-2.5l6-.016a1.25 1.25 0 0 1 1.254 1.246z" fill="#000000" data-original="#000000" class=""></path></g></g></svg>
+      <p>Click here to upload your order</p>
+    </div>
+
+    <ng-container *ngIf="orderImageURL">
+      <div class="image_area">
+        <img src="{{baseImageUrl+orderImageURL}}" alt="">
+      </div>
+      <ion-button expand="block" (click)="submitImage()">Submit</ion-button>
+    </ng-container>
+    
+  </div>
+</ion-content>
+

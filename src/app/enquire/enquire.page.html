@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Order now</ion-title>
+    <ion-buttons slot="end">
+      <ion-button></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <p>If you have any enquiry, please fill up the below form.</p>
+  <form [formGroup]="enquiryForm" (ngSubmit)="submitEnquiry()">
+  
+    <ion-item lines="none">
+      <ion-input placeholder="Full Name" type="text" formControlName="name" [ngClass]="{ 'is-invalid': submitted && f['name'].errors }"></ion-input>
+    </ion-item>
+    <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">  
+      <span class="danger" *ngIf="f['name'].errors['required']">Full Name is required.</span>  
+      <span class="danger" *ngIf="f['name'].errors['pattern']">Please enter valid full name.</span>  
+    </div>
+
+    <ion-item lines="none">
+      <ion-input formControlName="mobile" type="tel" maxlength="10" placeholder="Phone Number" [ngClass]="{ 'is-invalid': submitted && f['mobile'].errors }"></ion-input>
+    </ion-item>
+    <div *ngIf="submitted && f['mobile'].errors" class="invalid-feedback">  
+      <span class="danger" *ngIf="f['mobile'].errors['required']">Phone number is required.</span>  
+      <span class="danger" *ngIf="f['mobile'].errors['pattern']">Please enter valid phone number.</span>  
+    </div>
+
+    <ion-item lines="none">
+      <ion-input placeholder="Whatsapp No." type="tel" maxlength="10" formControlName="whatsapp_no" [ngClass]="{ 'is-invalid': submitted && f['whatsapp_no'].errors }"></ion-input>
+    </ion-item>
+    <div *ngIf="submitted && f['whatsapp_no'].errors" class="invalid-feedback">  
+      <span class="danger" *ngIf="f['whatsapp_no'].errors['required']">Whatsapp number is required.</span>  
+      <span class="danger" *ngIf="f['whatsapp_no'].errors['pattern']">Please enter valid whatsapp number.</span>  
+    </div>
+
+    <ion-item lines="none">
+      <ion-input placeholder="Address" type="text" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f['address'].errors }"></ion-input>
+    </ion-item>
+    <div *ngIf="submitted && f['address'].errors" class="invalid-feedback">  
+      <span class="danger" *ngIf="f['address'].errors['required']">Address is required.</span>  
+      <span class="danger" *ngIf="f['address'].errors['cannotContainSpace']">Please enter valid address.</span>  
+    </div>
+    
+    <ion-item lines="none" class="textarea">
+      <ion-textarea placeholder="Message" formControlName="message" [ngClass]="{ 'is-invalid': submitted && f['message'].errors }"></ion-textarea>
+    </ion-item>
+    <div *ngIf="submitted && f['message'].errors" class="invalid-feedback">  
+      <span class="danger" *ngIf="f['message'].errors['required']">Message is required.</span>  
+      <span class="danger" *ngIf="f['message'].errors['cannotContainSpace']">Please enter message.</span>  
+    </div>
+
+
+    
+    <div  *ngIf="userdetails.type==3">
+        <div class="upload_order" (click)="addImage()">
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0" viewBox="0 0 40 40" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><g fill="#000" fill-rule="evenodd" clip-rule="evenodd"><path d="m17.482 7.197-1.98 3.093-.018.03a2.786 2.786 0 0 1-2.3 1.23H11c-2.616 0-4.75 2.13-4.75 4.717V28.2c0 2.586 2.134 4.717 4.75 4.717h18.017c2.616 0 4.75-2.13 4.75-4.717V16.267c0-2.586-2.134-4.717-4.75-4.717h-2.2c-.892 0-1.756-.42-2.284-1.197L22.393 7.2a.29.29 0 0 0-.226-.117H17.7a.246.246 0 0 0-.218.114zm-2.095-1.364a2.745 2.745 0 0 1 2.313-1.25h4.467a2.79 2.79 0 0 1 2.27 1.178l.014.02 2.15 3.166c.038.057.108.103.216.103h2.2c3.983 0 7.25 3.236 7.25 7.217V28.2c0 3.98-3.267 7.217-7.25 7.217H11c-3.984 0-7.25-3.237-7.25-7.217V16.267c0-3.98 3.266-7.217 7.25-7.217h2.183c.074 0 .161-.036.227-.127z" fill="#000000" data-original="#000000" class=""></path><path d="M20 15.25a6.633 6.633 0 1 0 0 13.267 6.633 6.633 0 0 0 0-13.267zm-9.133 6.633a9.133 9.133 0 1 1 18.266 0 9.133 9.133 0 0 1-18.266 0z" fill="#000000" data-original="#000000" class=""></path><path d="M20 17.617c.69 0 1.25.56 1.25 1.25v6.016a1.25 1.25 0 1 1-2.5 0v-6.016c0-.69.56-1.25 1.25-1.25z" fill="#000000" data-original="#000000" class=""></path><path d="M24.25 21.863a1.25 1.25 0 0 1-1.246 1.254l-6 .016a1.25 1.25 0 1 1-.008-2.5l6-.016a1.25 1.25 0 0 1 1.254 1.246z" fill="#000000" data-original="#000000" class=""></path></g></g></svg>
+          <p>PLEASE UPLOAD THE PICTURE OF THE ORDER FORM</p>
+        </div>
+
+
+        
+          <ng-container *ngIf="imageUrl !==''">
+            <div class="image_area">
+              <img src="{{baseimageUrl+imageUrl}}" alt="">
+            </div>
+            
+          </ng-container>
+        </div>
+        
+
+        
+        <!-- <ion-button (click)="addImage()"><ion-icon slot="icon-only" name="camera-outline"></ion-icon></ion-button> -->
+      
+
+    <ion-button expand="block" type="submit">Submit</ion-button>
+  </form>
+</ion-content>

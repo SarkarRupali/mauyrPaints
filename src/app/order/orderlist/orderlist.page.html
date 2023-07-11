@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Order List</ion-title>
+    <ion-button slot="end" routerLink="/order-form">
+      <ion-icon name="add-outline"></ion-icon> Add Order
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="orderList.length>0;else orderBlock">
+    <ion-item *ngFor="let order of orderList">
+      <ion-thumbnail slot="start">
+        <img src="{{baseImageUrl+order.image}}">
+      </ion-thumbnail>
+      <ion-label>
+        <h4>{{order.created_at|date:'dd MMM, yyyy hh:mm a'}}</h4>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ng-template #orderBlock>
+    <ion-list>
+      <p>There is no order list</p>
+    </ion-list>
+  </ng-template>
+</ion-content>

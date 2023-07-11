@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+     <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Shipping Address</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="product_details" *ngIf="shippingAddress">
+    <!-- <h2>Address : <span>{{shippingAddress.address}}</span> </h2>
+    <h2>City : <span>{{shippingAddress.city}}</span> </h2>
+    <h2>State : <span>{{shippingAddress.state}}</span> </h2>
+    <h2>Pincode : <span>{{shippingAddress.pin}}</span> </h2> -->
+    
+    <ul>
+      <li>
+        <span>Address</span>
+        <span>{{shippingAddress.address}}</span>
+      </li>
+      <li>
+        <span>City</span>
+        <span>{{shippingAddress.city}}</span>
+      </li>
+      <li>
+        <span>State</span>
+        <span>{{shippingAddress.state}}</span>
+      </li>
+      <li>
+        <span>Pincode</span>
+        <span>{{shippingAddress.pin}}</span>
+      </li>
+    </ul>
+  </div>
+</ion-content>
+
+<ion-footer collapse="fade" class="ion-no-border">
+  <ion-row>
+    <ion-col col-6>
+      <ion-button expand="block" (click)="purchaseGifts()">Yes. Continue..</ion-button>
+    </ion-col>
+    <ion-col col-6>
+      <ion-button expand="block" routerLink="/billing-address-edit">No, Edit </ion-button>
+    </ion-col>
+  </ion-row>
+ 
+</ion-footer>
+

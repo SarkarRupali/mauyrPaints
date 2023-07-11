@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+     <ion-buttons slot="start">
+      <!-- <ion-menu-button>
+        <ion-icon
+          src="../../assets/images/menu.svg"
+        ></ion-icon>
+      </ion-menu-button> -->
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Details</ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ng-container *ngIf="orderType == 'cash withdrawal';else cashBlock">
+    <div class="product_details">
+      <h1 class="product_title">
+        Your Request amount is Rs.{{orderDetails.final_amount}}
+      </h1>
+      <ion-badge color="primary" *ngIf="orderDetails.paid_status==null || orderDetails.paid_status==0">Unpaid</ion-badge>
+      <ion-badge color="success" *ngIf="orderDetails.paid_status==1">Paid</ion-badge>
+    </div>
+  </ng-container>
+  <ng-template #cashBlock>
+    <div class="product_details">
+      <div class="product_details_img_wrap">
+        <ion-img src="{{baseURL+orderDetails?.product_image}}"></ion-img>
+      </div>
+      <h1 class="product_title">
+        {{orderDetails?.product_name}}
+      </h1>
+      <ion-badge color="primary" *ngIf="orderDetails.status==1">New</ion-badge>
+      <ion-badge color="success" *ngIf="orderDetails.status==2">Confirmed</ion-badge>
+      <ion-badge color="secondary" *ngIf="orderDetails.status==3">Shipped</ion-badge>
+      <ion-badge color="success" *ngIf="orderDetails.status==4">Delivered</ion-badge>
+      <ion-badge color="danger" *ngIf="orderDetails.status==5">Cancel</ion-badge>
+      <div class="product_content">
+        <p><strong>Quantity:</strong> <span>{{orderDetails?.qty}}</span></p>
+        <p><strong>Total Points:</strong> <span>{{orderDetails?.final_amount}}</span></p>
+        <p><strong>Address:</strong> <span>{{orderDetails?.shipping_address}}</span></p>
+        <p><strong>City:</strong> <span>{{orderDetails?.shipping_city}}</span></p>
+        <p><strong>State:</strong> <span>{{orderDetails?.shipping_state}}</span></p>
+        <p><strong>Pin:</strong><span>{{orderDetails?.shipping_pin}}</span></p>
+      </div>
+    </div>
+  </ng-template>
+</ion-content>

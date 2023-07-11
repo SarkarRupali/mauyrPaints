@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+     <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Product</ion-title>
+    <!-- <ion-buttons slot="end" *ngIf="userdata?.type==2">
+      <ion-button class="notification" routerLink="/notification">
+        <ion-icon
+          src="../../assets/images/notification.svg"
+        ></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="product_details">
+    <div class="product_details_img_wrap">
+      <!-- <ion-img src="{{imageUrl+productdetails.image}}"></ion-img> -->
+      <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide>
+          <ion-img src="{{imageUrl+productdetails.image}}"></ion-img>
+        </ion-slide>
+        <ion-slide *ngFor="let product of productImages">
+          <ion-img src="{{imageUrl+product.image}}"></ion-img>
+        </ion-slide>
+        <!-- <ion-slide>
+          <ion-img src="{{imageUrl+productdetails.image}}"></ion-img>
+        </ion-slide> -->
+      </ion-slides>
+    </div>
+    <h1 class="product_title">{{productdetails.name}}</h1>
+    <div class="short_desc" [innerHTML]="productdetails.short_desc"></div>
+    <div class="product_content">
+      <p [innerHTML]="productdetails.desc"></p>
+      <p><strong>Price:</strong> <span [innerHTML]="productdetails.price"></span></p>
+      <p><strong>Applied on:</strong> <span [innerHTML]="productdetails.apply_on"></span></p>
+      <p><strong>Applied by:</strong> <span [innerHTML]="productdetails.apply_by"></span></p>
+      <p><strong>Coverage:</strong> {{productdetails.coverage}}</p>
+      <p><strong>Self life:</strong> {{productdetails.self_life}}</p>
+      <p><strong>Size:</strong>{{productdetails.size}}</p>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer collapse="fade" class="ion-no-border">
+  <ion-button expand="block" (click) ="goToorder()">Order now</ion-button>
+</ion-footer>

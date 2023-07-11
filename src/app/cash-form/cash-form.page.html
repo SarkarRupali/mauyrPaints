@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cash Withdrawal</ion-title>
+    <ion-buttons slot="end">
+      <ion-button></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <p>You have <b>{{amount}}</b> points.</p>
+  <p>If you want to withdrawal cash please enter your money.</p>
+  <form [formGroup]="amountForm" (ngSubmit)="submitForm()">
+    <ion-item lines="none">
+      <ion-input formControlName="amount" type="tel" placeholder="Amount"  [ngClass]="{ 'is-invalid': submitted && f['amount'].errors }"></ion-input>
+    </ion-item>
+    <div *ngIf="submitted && f['amount'].errors" class="invalid-feedback">  
+      <span class="danger" *ngIf="f['amount'].errors['required']">Amount is required.</span>  
+      <span class="danger" *ngIf="f['amount'].errors['pattern']">Please enter valid amount.</span>  
+    </div>
+    <ion-button expand="block" type="submit">Submit</ion-button>
+  </form>
+</ion-content>
+
